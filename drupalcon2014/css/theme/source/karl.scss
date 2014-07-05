@@ -1,0 +1,36 @@
+@import "../template/mixins";
+@import "../template/settings";
+
+// Include theme-specific fonts
+@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);
+@import url(http://fonts.googleapis.com/css?family=PT+Mono);
+
+// Override theme settings (see ../template/settings.scss)
+
+// Background of the presentation
+$backgroundColor: #1b1b1b;
+
+// Primary/body text
+$mainFont: 'PT Sans', sans-serif;
+$mainFontSize: 36px;
+$mainColor: #e3e3e3;
+
+// Headings
+$headingMargin: 0 0 20px 0;
+$headingFont: 'PT Sans', sans-serif;
+$headingColor: #e3e3e3;
+$headingLineHeight: 1em;
+$headingLetterSpacing: 0.05em;
+$headingTextTransform: uppercase;
+$headingTextShadow: none;
+$heading1TextShadow: $headingTextShadow;
+
+// Links and actions
+$linkColor: #d95b43;
+$linkColorHover: #53777a;
+
+// Text selection
+$selectionBackgroundColor: #FF5E99;
+$selectionColor: #fff;
+
+@import "../template/theme";

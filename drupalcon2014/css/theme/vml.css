@@ -1,0 +1,135 @@
+@font-face {
+    font-family: 'Museo Sans';
+    src: url('../../fonts/MuseoSans_500-webfont.eot');
+    src: url('../../fonts/MuseoSans_500-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../../fonts/MuseoSans_500-webfont.woff') format('woff'),
+         url('../../fonts/MuseoSans_500-webfont.ttf') format('truetype'),
+         url('../../fonts/MuseoSans_500-webfont.svg#museo_sans500') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+/*********************************************
+ * GLOBAL STYLES
+ *********************************************/
+body {
+  background: #181818;
+  background-color: #181818; }
+
+.reveal {
+  font-family: "Museo Sans", sans-serif;
+  font-size: 36px;
+  font-weight: 200;
+  letter-spacing: 0.05em;
+  color: #e3e3e3; }
+
+::selection {
+  color: white;
+  background: #009dea;
+  text-shadow: none; }
+
+/*********************************************
+ * HEADERS
+ *********************************************/
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  margin: 0 0 20px 0;
+  color: #e3e3e3;
+  font-family: "Museo Sans", sans-serif;
+  line-height: 1em;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-shadow: none; }
+
+.reveal h1 {
+  text-shadow: none; }
+
+/*********************************************
+ * LINKS
+ *********************************************/
+.reveal a:not(.image) {
+  color: #009dea;
+  text-decoration: none;
+  -webkit-transition: color .15s ease;
+  -moz-transition: color .15s ease;
+  -ms-transition: color .15s ease;
+  -o-transition: color .15s ease;
+  transition: color .15s ease; }
+
+.reveal a:not(.image):hover {
+  color: #3dd3ec;
+  text-shadow: none;
+  border: none; }
+
+.reveal .roll span:after {
+  color: #fff;
+  background: #ad3923; }
+
+/*********************************************
+ * IMAGES
+ *********************************************/
+.reveal section img {
+  margin: 15px 0px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 4px solid #e3e3e3;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  -webkit-transition: all .2s linear;
+  -moz-transition: all .2s linear;
+  -ms-transition: all .2s linear;
+  -o-transition: all .2s linear;
+  transition: all .2s linear; }
+
+.reveal a:hover img {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #3dd3ec;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.55); }
+
+/*********************************************
+ * NAVIGATION CONTROLS
+ *********************************************/
+.reveal .controls div.navigate-left,
+.reveal .controls div.navigate-left.enabled {
+  border-right-color: #009dea; }
+
+.reveal .controls div.navigate-right,
+.reveal .controls div.navigate-right.enabled {
+  border-left-color: #009dea; }
+
+.reveal .controls div.navigate-up,
+.reveal .controls div.navigate-up.enabled {
+  border-bottom-color: #009dea; }
+
+.reveal .controls div.navigate-down,
+.reveal .controls div.navigate-down.enabled {
+  border-top-color: #009dea; }
+
+.reveal .controls div.navigate-left.enabled:hover {
+  border-right-color: #3dd3ec; }
+
+.reveal .controls div.navigate-right.enabled:hover {
+  border-left-color: #3dd3ec; }
+
+.reveal .controls div.navigate-up.enabled:hover {
+  border-bottom-color: #3dd3ec; }
+
+.reveal .controls div.navigate-down.enabled:hover {
+  border-top-color: #3dd3ec; }
+
+/*********************************************
+ * PROGRESS BAR
+ *********************************************/
+.reveal .progress {
+  background: rgba(0, 0, 0, 0.2); }
+
+.reveal .progress span {
+  background: #009dea;
+  -webkit-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+  -moz-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+  -ms-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+  -o-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+  transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985); }
