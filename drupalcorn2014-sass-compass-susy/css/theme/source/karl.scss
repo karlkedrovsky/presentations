@@ -34,3 +34,15 @@ $selectionBackgroundColor: #FF5E99;
 $selectionColor: #fff;
 
 @import "../template/theme";
+
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal ol, .reveal ul {
+  margin-left: 2em;
+}
+
+.reveal pre {
+  margin: 0;
+}

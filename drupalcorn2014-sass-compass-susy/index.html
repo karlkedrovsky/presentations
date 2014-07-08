@@ -38,11 +38,9 @@
 
         <section>
            <h2>Agenda</h2>
-           <ul>
-             <li>Setting Up The Tooling</li>
-             <li>Getting Started With The Theme Build</li>
-             <li>Alternatives</li>
-           </ul>
+           <p>Setting Up The Tooling</p>
+           <p>Getting Started With The Theme Build</p>
+           <p>Alternatives</p>
         </section>
 
         <section>
@@ -50,9 +48,35 @@
             <h2>Tools</h2>
           </section>
           <section>
-            <h2>Ruby</h2>
-            <p class="fragment">Mac or Linux - Already installed.</p>
+            <h2>Ruby and Bundler</h2>
+            <p class="fragment">Mac or Linux - Already installed</p>
             <p class="fragment">Windows - http://rubyinstaller.org</p>
+            <p class="fragment">Linux - Use the package manager</p>
+            <p class="fragment">My favorite - RVM (https://rvm.io)</p>
+          </section>
+          <section>
+            <h2>Sass</h2>
+            <p>CSS extention language</p>
+            <p>http://sass-lang.com</p>
+          </section>
+          <section>
+            <h2>Compass</h2>
+            <p>CSS authoring framework</p>
+            <ul>
+              <li>Sass mixins for common tasks</li>
+              <li>Additional functionality like sprites</li>
+              <li>Makes using CSS3 easier with mixins</li>
+            </ul>
+            <p>http://compass-style.org/</p>
+          </section>
+          <section>
+            <h2>Guard</h2>
+            <p>An event listener and task runner - runs stuff with things have changed</p>
+            <ul>
+                <li>We'll use it to run compass when sass files change</li>
+                <li>Can also be used for things like livereload and javascript processing</li>
+            </ul>
+            <p>http://guardgem.org</p>
           </section>
           <section>
             <h2>GUI Tools</h2>
@@ -62,7 +86,159 @@
         </section>
 
         <section>
-          <h2>Configuration</h2>
+          <section>
+            <h2>Directory Structure</h2>
+            <p>
+              <ul>
+                <li>sass -> Sass files and partials</li>
+                <li>css -> Empty to start with</li>
+              </ul>
+            </p>
+          </section>
+          <section>
+            <h2>Demo!</h2>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Installing Gems With Bundler</h2>
+          </section>
+          <section>
+            <h2>Gemfile</h2>
+            <p><pre><code data-trim>
+source 'http://rubygems.org'
+
+# Update compass so Sass 3.3 and Susy 2 can be used
+gem "compass", ">= 1.0.0.alpha.19"
+
+# Susy
+gem "susy"
+gem "breakpoint"
+
+# Guard
+gem "guard"
+gem "guard-compass"
+            </code></pre></p>
+            <p>
+              Run:
+              <pre><code>
+bundle install
+              </code></pre>
+            </p>
+          </section>
+          <section>
+            <h2>Demo!</h2>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Configuration</h2>
+          </section>
+          <section>
+            <h2>Compass</h2>
+            <p>
+              config.rb -> Tells compass where to find and put everything.
+              <pre><code>
+require "susy"
+require "breakpoint"
+
+http_path = "/"
+css_dir = "css"
+sass_dir = "sass"
+images_dir = "images"
+javascripts_dir = "js"
+
+output_style = :expanded
+relative_assets = true
+line_comments = true
+              </code></pre>
+            </p>
+          </section>
+          <section>
+            <h2>Guard</h2>
+            <p>
+              <pre><code>
+guard :compass do
+  watch(%r{sass/.+\.scss$})
+end
+              </code></pre>
+            </p>
+          </section>
+          <section>
+            <h2>Drupal</h2>
+            <p>.info file specifies css version of each sass file</p>
+          </section>
+          <section>
+            <h2>Demo!</h2>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Theming</h2>
+          </section>
+          <section>
+            <h2>Organizing Sass Files</h2>
+          </section>
+          <section>
+            <h2>Mobile First With Susy</h2>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Alternatives</h2>
+          </section>
+          <section>
+            <h2>Sass</h2>
+            <p class="fragment">There isn't one</p>
+          </section>
+          <section>
+            <h2>Compass</h2>
+            <p>Burbon, Neat, and Bitters</p>
+            <ul>
+              <li>Collections of Sass mixins</li>
+              <li>Does not include non-sass mixin functionality of Compass (e.g. sprites)</li>
+              <li>Light weight - no need for Compass or Guard, just Sass</li>
+            </ul>
+            <p>http://bourbon.io</p>
+          </section>
+          <section>
+            <h2>Compass</h2>
+            <p>Mixin replacement libraries (e.g. Burbon/Neat/Bitters)</p>
+            <p>Libraries/scripts used by build systems (e.g. guard, grunt, gulp)</p>
+          </section>
+          <section>
+            <h2>Guard</h2>
+            <p>Grunt - http://gruntjs.com</p>
+            <p>Gulp - http://gulpjs.com</p>
+            <p>Both are javascript/node applications</p>
+            <p>Each have extensive plugin libraries for all kinds of functionality</p>
+          </section>
+          <section>
+            <h2>Larger Frameworks</h2>
+            <p>Bootstrap - http://getbootstrap.com</p>
+            <p>Foundation - http://foundation.zurb.com</p>
+          </section>
+        </section>
+
+        <section>
+          <h2>Resources</h2>
+          <p class="fragment">
+            My Github - https://github.com/karlkedrovsky
+            <ul class="fragment">
+                <li>drupal-sass-starter</li>
+                <li>vagrant-starter</li>
+            </ul>
+          </p>
+          <p class="fragment">Sass - http://sass-lang.com</p>
+          <p class="fragment">Compass - http://compass-style.org</p>
+          <p class="fragment">Susy - http://susy.oddbird.net</p>
+          <p class="fragment">Breakpoint - http://breakpoint-sass.com/</p>
+          <p class="fragment">Bourbon, Neat, and Bitters - http://bourbon.io</p>
+          <p class="fragment">Guard - http://guardgem.org</p>
         </section>
 
       </div>
