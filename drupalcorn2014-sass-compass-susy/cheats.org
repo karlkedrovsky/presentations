@@ -1,0 +1,75 @@
+#+STARTUP: indent
+
+* _layout.scss
+
+** Initial container
+
+#container {
+  @include breakpoint($medium-width) {
+    @include container(65em);
+  }
+}
+
+** Layout in order of html
+
+#container {
+  @include breakpoint($medium-width) {
+    @include container(65em);
+    header, nav, footer {
+      @include span(4 of 4);
+    }
+    #content {
+      @include span(2 of 4);
+    }
+    #sidebar-first {
+      @include span(1 of 4);
+    }
+    #sidebar-second {
+      @include span(1 of 4 at 4);
+    }
+  }
+}
+
+** Layout with first sidebar at the beginning
+
+#container {
+  @include breakpoint($medium-width) {
+    @include container(65em);
+    header, nav, footer {
+      @include span(4 of 4);
+    }
+    #content {
+      @include span(2 of 4);
+      @include prefix(1 of 4);
+    }
+    #sidebar-first {
+      @include span(1 of 4);
+      @include pull(3 of 4);
+    }
+    #sidebar-second {
+      @include span(1 of 4 at 4);
+    }
+  }
+}
+
+** Final layout after adding "columns: 4" to susy settings.
+
+#container {
+  @include breakpoint($medium-width) {
+    @include container(65em);
+    header, nav, footer {
+      @include span(4);
+    }
+    #content {
+      @include span(2);
+      @include prefix(1);
+    }
+    #sidebar-first {
+      @include span(1);
+      @include pull(3);
+    }
+    #sidebar-second {
+      @include span(last 1);
+    }
+  }
+}

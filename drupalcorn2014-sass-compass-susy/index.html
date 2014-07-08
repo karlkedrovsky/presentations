@@ -44,6 +44,11 @@
         </section>
 
         <section>
+          <h2>Examples</h2>
+          <p>https://github.com/karlkedrovsky/drupal-sass-starter</p>
+        </section>
+
+        <section>
           <section>
             <h2>Tools</h2>
           </section>
@@ -165,6 +170,12 @@ guard :compass do
 end
               </code></pre>
             </p>
+            <p>
+              Run:
+              <pre><code>
+bundle exec guard
+              </code></pre>
+            </p>
           </section>
           <section>
             <h2>Drupal</h2>
@@ -181,9 +192,83 @@ end
           </section>
           <section>
             <h2>Organizing Sass Files</h2>
+            <p class="fragment">By page/site structure - header, footer, content, etc.</p>
+            <p class="fragment">By Drupal bits - nodes, views, blocks, etc.</p>
+            <p class="fragment">By site features - pages, blog, image gallery, etc.</p>
+            <p class="fragment">Don't forget your content authors</p>
+          </section>
+          <section>
+            <h2>Example File Structure</h2>
+            <p>
+              <pre><code>
+sass
+├── _content.scss
+├── _footer.scss
+├── _forms.scss
+├── _global_and_wysiwyg.scss
+├── _global.scss
+├── _header.scss
+├── _layout.scss
+├── _nav.scss
+├── style.scss
+├── _variables.scss
+└── wysiwyg.scss
+              </code></pre>
+            </p>
+          </section>
+          <section>
+            <h2>Demo!</h2>
           </section>
           <section>
             <h2>Mobile First With Susy</h2>
+          </section>
+          <section>
+            <h2>Setup - style.scss</h2>
+            <p>
+              <pre><code>
+// Library imports
+@import "compass/reset";
+@import "compass/css3";
+@import "compass/typography";
+@import "susy";
+@import "breakpoint";
+
+// Project specific imports
+@import "variables";
+@import "layout";
+@import "global_and_wysiwyg";
+@import "global";
+@import "header";
+@import "footer";
+@import "nav";
+@import "content";
+@import "forms";
+
+@include establish-baseline;
+              </code></pre>
+            </p>
+          </section>
+          <section>
+            <h2>Setup - _variables.scss</h2>
+            <p>
+              <pre><code>
+// Vertical rhythm
+$base-font-size: 16px;
+$base-line-height: 24px;
+
+// Screen sizes
+$medium-width: min-width 45em;
+$large-width: min-width 60em;
+
+// Global susy settings
+$susy: (
+  gutters: 1/10
+);
+              </code></pre>
+            </p>
+          </section>
+          <section>
+            <h2>Demo!</h2>
           </section>
         </section>
 
