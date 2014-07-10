@@ -37,6 +37,17 @@
       <div class="slides">
 
         <section>
+           <h2>Creating Mobile First Responsive Themes With Sass, Compass and Susy</h2>
+        </section>
+
+        <section>
+           <h2>Karl Kedrovsky</h2>
+           <p>Solutions Architect at VML</p>
+           <p>Drupal developer since 2005</p>
+           <p>Kansas City Drupal Users Group</p>
+        </section>
+
+        <section>
            <h2>Agenda</h2>
            <p>Setting Up The Tooling</p>
            <p>Getting Started With The Theme Build</p>
@@ -46,6 +57,7 @@
         <section>
           <h2>Examples</h2>
           <p>https://github.com/karlkedrovsky/drupal-sass-starter</p>
+          <p>https://github.com/karlkedrovsky/vagrant-starter</p>
         </section>
 
         <section>
@@ -76,7 +88,7 @@
           </section>
           <section>
             <h2>Guard</h2>
-            <p>An event listener and task runner - runs stuff with things have changed</p>
+            <p>An event listener (file watcher) and task runner - runs stuff with things have changed</p>
             <ul>
                 <li>We'll use it to run compass when sass files change</li>
                 <li>Can also be used for things like livereload and javascript processing</li>
@@ -85,23 +97,8 @@
           </section>
           <section>
             <h2>GUI Tools</h2>
-            <p>Scout - http://mhs.github.io/scout-app</p>
-            <p>Compass.app - http://compass.kkbox.com</p>
-          </section>
-        </section>
-
-        <section>
-          <section>
-            <h2>Directory Structure</h2>
-            <p>
-              <ul>
-                <li>sass -> Sass files and partials</li>
-                <li>css -> Empty to start with</li>
-              </ul>
-            </p>
-          </section>
-          <section>
-            <h2>Demo!</h2>
+            <p>Scout - <a href="http://mhs.github.io/scout-app" target="_blank">http://mhs.github.io/scout-app</a> - Mac and Windows</p>
+            <p>Compass.app - <a href="http://compass.kkbox.com" target="_blank">http://compass.kkbox.com</a> - Mac, Windows, and Linux</p>
           </section>
         </section>
 
@@ -110,7 +107,8 @@
             <h2>Installing Gems With Bundler</h2>
           </section>
           <section>
-            <h2>Gemfile</h2>
+            <h2>Bundler</h2>
+            <p>Gemfile - Tells bundler what gems you want to use and which versions you need</p>
             <p><pre><code data-trim>
 source 'http://rubygems.org'
 
@@ -163,6 +161,7 @@ line_comments = true
           </section>
           <section>
             <h2>Guard</h2>
+            <p>Guardfile - Tells Guard what files to watch and what to do when they change</p>
             <p>
               <pre><code>
 guard :compass do
@@ -191,6 +190,15 @@ bundle exec guard
             <h2>Theming</h2>
           </section>
           <section>
+            <h2>Directory Structure</h2>
+            <p>
+              <ul>
+                <li>sass -> Sass files and partials</li>
+                <li>css -> Empty to start with</li>
+              </ul>
+            </p>
+          </section>
+          <section>
             <h2>Organizing Sass Files</h2>
             <p class="fragment">By page/site structure - header, footer, content, etc.</p>
             <p class="fragment">By Drupal bits - nodes, views, blocks, etc.</p>
@@ -201,9 +209,9 @@ bundle exec guard
             <h2>Example File Structure</h2>
             <p>
               <pre><code>
-sass
-├── _content.scss
-├── _footer.scss
+sass                                    css
+├── _content.scss                       ├── style.css
+├── _footer.scss                        └── wysiwyg.css
 ├── _forms.scss
 ├── _global_and_wysiwyg.scss
 ├── _global.scss
@@ -223,7 +231,8 @@ sass
             <h2>Mobile First With Susy</h2>
           </section>
           <section>
-            <h2>Setup - style.scss</h2>
+            <h2>Setup</h2>
+            <p>style.scss</p>
             <p>
               <pre><code>
 // Library imports
@@ -249,7 +258,8 @@ sass
             </p>
           </section>
           <section>
-            <h2>Setup - _variables.scss</h2>
+            <h2>Setup</h2>
+            <p>_variables.scss</p>
             <p>
               <pre><code>
 // Vertical rhythm
@@ -278,7 +288,8 @@ $susy: (
           </section>
           <section>
             <h2>Sass</h2>
-            <p class="fragment">There isn't one</p>
+            <p class="fragment">There isn't one (if you want to use Sass)</p>
+            <p class="fragment">Less - <a href="http://lesscss.org" target="_blank">http://lesscss.org</a></p>
           </section>
           <section>
             <h2>Compass</h2>
@@ -288,7 +299,7 @@ $susy: (
               <li>Does not include non-sass mixin functionality of Compass (e.g. sprites)</li>
               <li>Light weight - no need for Compass or Guard, just Sass</li>
             </ul>
-            <p>http://bourbon.io</p>
+            <p><a href="http://bourbon.io" target="_blank">http://bourbon.io</a></p>
           </section>
           <section>
             <h2>Compass</h2>
@@ -297,35 +308,44 @@ $susy: (
           </section>
           <section>
             <h2>Guard</h2>
-            <p>Grunt - http://gruntjs.com</p>
-            <p>Gulp - http://gulpjs.com</p>
+            <p>Grunt - <a href="http://gruntjs.com" target="_blank">http://gruntjs.com</a></p>
+            <p>Gulp - <a href="http://gulpjs.com" target="_blank">http://gulpjs.com</a></p>
             <p>Both are javascript/node applications</p>
             <p>Each have extensive plugin libraries for all kinds of functionality</p>
           </section>
           <section>
             <h2>Larger Frameworks</h2>
-            <p>Bootstrap - http://getbootstrap.com</p>
-            <p>Foundation - http://foundation.zurb.com</p>
+            <p>Bootstrap - <a href="http://getbootstrap.com" target="_blank">http://getbootstrap.com</a></p>
+            <p>Foundation - <a href="http://foundation.zurb.com" target="_blank">http://foundation.zurb.com</a></p>
           </section>
         </section>
 
         <section>
           <h2>Resources</h2>
-          <p class="fragment">
-            My Github - https://github.com/karlkedrovsky
-            <ul class="fragment">
+          <p>
+            My Github - <a href="https://github.com/karlkedrovsky" target="_blank">https://github.com/karlkedrovsky</a>
+            <ul>
                 <li>drupal-sass-starter</li>
                 <li>vagrant-starter</li>
             </ul>
           </p>
-          <p class="fragment">Sass - http://sass-lang.com</p>
-          <p class="fragment">Compass - http://compass-style.org</p>
-          <p class="fragment">Susy - http://susy.oddbird.net</p>
-          <p class="fragment">Breakpoint - http://breakpoint-sass.com/</p>
-          <p class="fragment">Bourbon, Neat, and Bitters - http://bourbon.io</p>
-          <p class="fragment">Guard - http://guardgem.org</p>
+          <p>Sass - <a href="http://sass-lang.com" target="_blank">http://sass-lang.com</p></a>
+          <p>Compass - <a href="http://compass-style.org" target="_blank">http://compass-style.org</p></a>
+          <p>Susy - <a href="http://susy.oddbird.net" target="_blank">http://susy.oddbird.net</p></a>
+          <p>Breakpoint - <a href="http://breakpoint-sass.com/" target="_blank">http://breakpoint-sass.com</p></a>
+          <p>Guard - <a href="http://guardgem.org" target="_blank">http://guardgem.org</p></a>
+          <p>Omega 4 - <a href="https://www.drupal.org/project/omega" target="_blank">https://www.drupal.org/project/omega</a></p>
         </section>
 
+        <section>
+          <h2>Questions?</h2>
+        </section>
+
+        <section>
+          <h2>Thank You!</h2>
+          <p>Email - <a href="mailto:karl@kedrovsky.com">karl@kedrovsky.com</a> or <a href="mailto:kkedrovsky@vml.com">kkedrovsky@vml.com</a></p>
+          <p>Twitter - <a href="https://twitter.com/karlkedrovsky" target="_blank">@karlkedrovsky</a></p>
+          <p>Drupal.org - <a href="https://www.drupal.org/u/karlkedrovsky" target="_blank">https://www.drupal.org/u/karlkedrovsky</a></p>
       </div>
 
     </div>
