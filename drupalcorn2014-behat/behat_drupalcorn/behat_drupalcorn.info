@@ -1,0 +1,5 @@
+name = Behat Drupalcorn
+description = Sample module for Drupalcorn Behat talk
+core = 7.x
+
+dependencies[] = behatrunner

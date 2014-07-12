@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Example test for Drupalcorn Behat talk
+ */
+
+/**
+ * Implements hook_behat_info()
+ */
+function behat_drupalcorn_behat_info() {
+  $info = array(
+    'paths' => array(
+      // Specify the directory in which .feature files are located, relative
+      // to the module directory.
+      'features' => 'features',
+    ),
+  );
+
+  return $info;
+}

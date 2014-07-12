@@ -59,7 +59,7 @@
            <ul>
                <li class="fragment">Describing the behavior of a feature of our application</li>
                <li class="fragment">Implementing the feature</li>
-               <li class="fragment">Validate the behavior of the application using the description</li>
+               <li class="fragment">Validating the behavior of the application using the description</li>
                <li class="fragment">Lather, rinse, repeat</li>
            </ul>
         </section>
@@ -69,30 +69,300 @@
             <h2>Describing The Behavior</h2>
             <p></p>
           </section>
+          <section>
+            <h2>Gherkin</h2>
+            <p>
+              Gherkin is a declarative, business readable, domain specific language created especially for behavior descriptions.
+            </p>
+          </section>
+          <section>
+            <h2>Gherkin</h2>
+            <p>
+              homepage.feature
+              <pre><code>
+Feature: Home Page
+  Tests the home page
+
+  Scenario: View home page
+    Given I am on "/"
+    Then I should see "Welcome to behat"
+              </code></pre>
+            </p>
+            <p>
+              <ul>
+                <li>Given - Precondition</li>
+                <li>When - User action</li>
+                <li>Then - Testable outcome</li>
+              </ul>
+            </p>
+          </section>
+        </section>
+
+        <section>
+          <h2>Tooling</h2>
+          <p>Using Behat as a standalone tool</p>
+          <p>Behat Runner Drupal module</p>
         </section>
 
         <section>
           <section>
-            <h2>Tooling</h2>
-            <p></p>
+            <h2>Standalone Behat</h2>
+            <p>
+              Run:
+              <pre><code>
+mkdir drupalcorn_behat
+              </code></pre>
+            </p>
+            <p>
+              composer.json
+              <pre><code>
+{
+  "require": {
+    "drupal/drupal-extension": "*"
+  },
+  "config": {
+    "bin-dir": "bin/"
+  }
+}
+              </code></pre>
+            </p>
+            <p>
+              Run:
+              <pre><code>
+composer install
+              </code></pre>
+            </p>
+          </section>
+          <section>
+            <h2>Standalone Behat</h2>
+            <p>
+              <pre><code>
+drupalcorn_behat
+├── behat.yml
+├── bin
+├── composer.json
+├── composer.lock
+└── vendor
+              </code></pre>
+            </p>
+          </section>
+          <section>
+            <h2>Demo</h2>
+            <aside class="notes">
+              Show composer.lock to see all the dependencies required by drupal-extension
+            </aside>
+          </section>
+          <section>
+            <h2>Standalone Behat</h2>
+            <p>
+              behat.yml
+              <pre><code>
+default:
+  paths:
+    features: 'features'
+  extensions:
+    Behat\MinkExtension\Extension:
+      goutte: ~
+      selenium2: ~
+      base_url: http://behat/
+    Drupal\DrupalExtension\Extension:
+      blackbox: ~
+              </code></pre>
+            </p>
+          </section>
+          <section>
+            <h2>Standalone Behat</h2>
+            <p>
+              Run:
+              <pre><code>
+mkdir features
+              </code></pre>
+            </p>
+            <p>
+              features/homepage.features
+              <pre><code>
+Feature: Home Page
+  Tests the home page
+
+  Scenario: View home page
+    Given I am on "/"
+    Then I should see "Welcome to behat"
+              </code></pre>
+            </p>
+            <p>
+              Run:
+              <pre><code>
+./bin/behat
+              </code></pre>
+            </p>
+          </section>
+          <section>
+            <h2>Demo</h2>
+            <aside class="notes">
+              Run the test passing and failing.
+            </aside>
           </section>
         </section>
 
         <section>
           <section>
-            <h2>Implementing The Behavior</h2>
+            <h2>Using Behat Runner</h2>
+          </section>
+          <section>
+            <h2>Installing Behat Runner</h2>
+            <p class="fragment">YOU HAVE TO USE DRUSH!</p>
+            <p class="fragment">Edit settings.php and set $base_url</p>
+            <p>
+              <pre><code class="fragment">
+drush en -y behatrunner
+drush brm
+drush bls
+drush brun
+              </code></pre>
+            </p>
+          </section>
+          <section>
+            <h2>Demo</h2>
+            <aside class="notes">
+              Show sites/default/files/behatrunner/behat.yml
+              Show sites/default/files/composer/composer.json
+              Show contents of sites/all/vendor
+              Demo listing and running the basic install test
+              Show admin pages for composer - admin/config/system/composer-manager
+              Show admin pages for behat runner - admin/config/development/behatrunner/scenarios
+            </aside>
           </section>
         </section>
 
         <section>
           <section>
-            <h2>Validating The Behavior</h2>
+            <h2>Adding Tests With Behat Runner</h2>
+          </section>
+          <section>
+            <h2>Custom Modules</h2>
+            <p>
+              New module just for testing - Behat Drupalcorn
+            </p>
+          </section>
+          <section>
+            <h2>Custom Modules</h2>
+            <p>behat_drupalcorn.info</p>
+            <p>
+              <pre><code>
+name = Behat Drupalcorn
+description = Sample module for Drupalcorn Behat talk
+core = 7.x
+
+dependencies[] = behatrunner
+              </code></pre>
+            </p>
+          </section>
+          <section>
+            <h2>Custom Modules</h2>
+            <p>behat_drupalcorn.module</p>
+            <p>
+              <pre><code>
+&lt;?php
+
+/**
+ * Implements hook_behat_info()
+ */
+function behat_drupalcorn_behat_info() {
+  $info = array(
+    'paths' => array(
+      'features' => 'features',
+    ),
+  );
+
+  return $info;
+}
+              </code></pre>
+            </p>
+          </section>
+          <section>
+            <h2>Custom Modules</h2>
+            <p>features/homepage.feauture</p>
+            <p>
+              <pre><code>
+Feature: Home Page
+  Tests the home page
+
+  Scenario: View home page
+    Given I am on "/"
+    Then I should see "Welcome to behat"
+              </code></pre>
+            </p>
+          </section>
+          <section>
+            <h2>Demo</h2>
+            <aside class="notes">
+              Copy custom module to drupal install
+              enable drupal module
+              drush bls
+              drush brm
+              drush bls
+              drush brun
+            </aside>
+          </section>
+          <section>
+            <h2>Features</h2>
+          </section>
+          <section>
+            <h2>Features</h2>
+            <p>Setup - Blog feature</p>
+          </section>
+          <section>
+            <h2>Features</h2>
+            <p>
+              behat_talk_blog.behat.inc:
+              <pre><code>
+&lt;?php
+
+/**
+ * Implements hook_behat_info()
+ */
+function behat_talk_blog_behat_info() {
+  $info = array(
+    'paths' => array(
+      'features' => 'features',
+    ),
+  );
+
+  return $info;
+}
+              </code></pre>
+            </p>
+          </section>
+          <section>
+            <h2>Features</h2>
+            <p>
+              Add this line to the end of behat_talk_blog.module:
+              <pre><code>
+include_once 'behat_talk_blog.behat.inc';
+              </code></pre>
+            </p>
+          </section>
+          <section>
+            <h2>Features</h2>
+            <p>
+              features/blog.feature:
+              <pre><code>
+Feature: Blog
+  Tests the blog feature
+
+  Scenario: View blog page
+    Given I am on the homepage
+    When I click "Blog"
+    Then I should see "The Really Cool Blog"
+              </code></pre>
+            </p>
           </section>
         </section>
 
         <section>
           <h2>Resources</h2>
-          <p>Behat - <a href="http://behat.org/" target="_blank">http://behat.org</a></p>
+          <p>Behat/Mink - <a href="http://behat.org/" target="_blank">http://behat.org</a></p>
+          <p>Gherkin - <a href="http://docs.behat.org/guides/1.gherkin.html" target="_blank">http://docs.behat.org/guides/1.gherkin.html</a></p>
         </section>
 
         <section>
