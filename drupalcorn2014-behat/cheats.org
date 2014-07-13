@@ -1,0 +1,19 @@
+#+STARTUP: indent
+
+* blog.feature
+
+Feature: Blog
+  Tests the blog feature
+
+  Scenario: View blog page
+    Given I am on the homepage
+    When I click "Blog"
+    Then I should see "The Really Cool Blog"
+
+  @api
+  Scenario: Create blog post
+    Given "blog_post" nodes:
+    | title      | body                |
+    | First Post | Sample body content |
+    When I go to "blog"
+    Then I should see "First Post"

@@ -55,7 +55,7 @@
 
         <section>
            <h2>Definition (In Practice)</h2>
-           <p>Testing an application (as opposed to a unit of code) by:</p>
+           <p>Developing an application (as opposed to a unit of code) by:</p>
            <ul>
                <li class="fragment">Describing the behavior of a feature of our application</li>
                <li class="fragment">Implementing the feature</li>
@@ -314,7 +314,7 @@ Feature: Home Page
           <section>
             <h2>Features</h2>
             <p>
-              behat_talk_blog.behat.inc:
+              behat_talk_blog.behat_tests.inc:
               <pre><code>
 &lt;?php
 
@@ -338,7 +338,7 @@ function behat_talk_blog_behat_info() {
             <p>
               Add this line to the end of behat_talk_blog.module:
               <pre><code>
-include_once 'behat_talk_blog.behat.inc';
+include_once 'behat_talk_blog.behat_tests.inc';
               </code></pre>
             </p>
           </section>
@@ -360,9 +360,89 @@ Feature: Blog
         </section>
 
         <section>
+          <section>
+            <h2>Drupal Extension</h2>
+          </section>
+          <section>
+            <h2>Blackbox Driver</h2>
+            <p class="fragment">Assumes no privileged access to the site</p>
+            <p class="fragment">Server can be local or remote</p>
+            <p class="fragment">
+              Region Maps
+              <ul><li class="fragment">I should see "About Us" in the "footer" region</li></ul>
+            </p>
+            <p class="fragment">Check for Drupal errors or messages</p>
+          </section>
+          <section>
+            <h2>Drush Driver</h2>
+            <p class="fragment">Allows tests to be run as logged in users with specific roles</p>
+            <p class="fragment">Server can be local or remote</p>
+          </section>
+          <section>
+            <h2>Drupal API Driver</h2>
+            <p class="fragment">Allows tests to be run as logged in users with specific roles</p>
+            <p class="fragment">Lets you create nodes, vocabularies, and terms in the test specs</p>
+            <p class="fragment">Fastest of the three drivers</p>
+            <p class="fragment">Must be run locally</p>
+          </section>
+          <section>
+            <h2>API Example</h2>
+            <p>
+              <pre><code>
+  @api
+  Scenario: Create blog post
+    Given "blog_post" nodes:
+    | title      | body                |
+    | First Post | Sample body content |
+    When I go to "blog"
+    Then I should see "First Post"
+              </code></pre>
+            </p>
+            <p>The drush and api drivers require the "@api" tag so the system knows to bootstrap Drupal</p>
+          </section>
+          <section>
+            <h2>Driver Specification</h2>
+            <p>
+              sites/default/files/behatrunner/behat.xml
+              <pre><code>
+default:
+  extensions:
+    Behat\MinkExtension\Extension:
+      goutte: null
+      default_session: goutte
+      javascript_session: selenium2
+      selenium2:
+        wd_host: 'http://127.0.0.1:4444/wd/hub'
+      base_url: 'http://behat'
+    Drupal\DrupalExtension\Extension:
+      blackbox: null
+      drush:
+        alias: '@self'
+      api_driver: drupal
+      drupal:
+        drupal_root: /var/www/behat
+      region_map:
+        footer: #footer
+              </code></pre>
+            </p>
+          </section>
+          <section>
+            <h2>Custom Subcontexts</h2>
+            <p>Lets you write reusable step definitions for your modules</p>
+          </section>
+        </section>
+
+        <section>
           <h2>Resources</h2>
           <p>Behat/Mink - <a href="http://behat.org/" target="_blank">http://behat.org</a></p>
           <p>Gherkin - <a href="http://docs.behat.org/guides/1.gherkin.html" target="_blank">http://docs.behat.org/guides/1.gherkin.html</a></p>
+          <p>Drupal Extension Docs - <a href="http://dspeak.com/drupalextension" target="_blank">http://dspeak.com/drupalextension</a></p>
+          <p>
+            My Github - <a href="https://github.com/karlkedrovsky" target="_blank">https://github.com/karlkedrovsky</a>
+            <ul>
+                <li>vagrant-starter</li>
+            </ul>
+          </p>
         </section>
 
         <section>
