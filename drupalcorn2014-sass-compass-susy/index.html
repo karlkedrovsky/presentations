@@ -70,6 +70,11 @@
             <p class="fragment">Windows - http://rubyinstaller.org</p>
             <p class="fragment">Linux - Use the package manager</p>
             <p class="fragment">My favorite - RVM (https://rvm.io)</p>
+            <aside class="notes">
+              <p>Why Ruby? - The language the original Sass processor was written in</p>
+              <p>More recently there are things like libsass that make it easier to use other tools</p>
+              <p>The choice to use the "normal" Sass also helps inform our other tools</p>
+            </aside>
           </section>
           <section>
             <h2>Sass</h2>
@@ -129,6 +134,9 @@ gem "guard-compass"
 bundle install
               </code></pre>
             </p>
+            <aside class="notes">
+              <p>You won't see the sass gem - compass is specifically written to use sass and requires it by itself</p>
+            </aside>
           </section>
           <section>
             <h2>Demo</h2>
@@ -189,6 +197,7 @@ bundle exec guard
             <aside class="notes">
               <p>Show location/contents of config.rb</p>
               <p>Show location/contents of Guardfile</p>
+              <p>Show .info file - We'll see how this gets generated in a bit (doesn't have to be a single file, but why not)</p>
               <p>Run the "bundle exec guard" command</p>
             </aside>
           </section>
@@ -217,7 +226,7 @@ bundle exec guard
           <section>
             <h2>Example File Structure</h2>
             <p>
-              <pre><code>
+              <pre><code class="no-highlight">
 sass                                    css
 ├── _content.scss                       ├── style.css
 ├── _footer.scss                        └── wysiwyg.css
@@ -274,7 +283,7 @@ sass                                    css
             <h2>Setup</h2>
             <p>_variables.scss</p>
             <p>
-              <pre><code>
+              <pre><code class="scss">
 // Vertical rhythm
 $base-font-size: 16px;
 $base-line-height: 24px;
@@ -293,6 +302,7 @@ $susy: (
           <section>
             <h2>Demo</h2>
             <aside class="notes">
+              <p>Show page.tpl.php</p>
               <p>Show test website</p>
               <p>Test updating _global.scss to demo automatic updating</p>
               <p>
@@ -365,6 +375,7 @@ $susy: (
           <p>Breakpoint - <a href="http://breakpoint-sass.com/" target="_blank">http://breakpoint-sass.com</p></a>
           <p>Guard - <a href="http://guardgem.org" target="_blank">http://guardgem.org</p></a>
           <p>Omega 4 - <a href="https://www.drupal.org/project/omega" target="_blank">https://www.drupal.org/project/omega</a></p>
+          <p>Level Up Tuts - <a href="http://leveluptuts.com/" target="_blank">http://leveluptuts.com/</a></p>
         </section>
 
         <section>
