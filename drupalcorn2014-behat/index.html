@@ -37,37 +37,49 @@
       <div class="slides">
 
         <section>
-           <h2>Enabling Automated BDD Testing In Drupal With Behat</h2>
+          <h2>Enabling Automated BDD Testing In Drupal With Behat</h2>
         </section>
 
         <section>
-           <h2>Karl Kedrovsky</h2>
-           <p>Solutions Architect at VML</p>
-           <p>Drupal developer since 2005</p>
-           <p>Kansas City Drupal Users Group</p>
+          <h2>Karl Kedrovsky</h2>
+          <p>Solutions Architect at VML</p>
+          <p>Drupal developer since 2005</p>
+          <p>Kansas City Drupal Users Group</p>
+        </section>
+
+        <section>
+          <h2>What We'll See Today</h2>
+          <ul>
+            <li class="fragment">A (poor) definition of BDD</li>
+            <li class="fragment">How to write the tests</li>
+            <li class="fragment">Tools - Both Drupal and non Drupal</li>
+            <li class="fragment">Some approaches to integrating Behat into your projects</li>
+          </ul>
         </section>
  
         <section>
-           <h2>Definition</h2>
-           <p>a communication and collaboration framework for developers, QA and non-technical or business participants in a software project</p>
-           <p>-- Wikipedia</p>
+          <h2>Definition</h2>
+          <p>A communication and collaboration framework for developers, QA and non-technical or business participants in a software project</p>
+          <p>-- Wikipedia</p>
         </section>
 
         <section>
-           <h2>Definition (In Practice)</h2>
-           <p>Developing an application (as opposed to a unit of code) by:</p>
-           <ul>
-               <li class="fragment">Describing the behavior of a feature of our application</li>
-               <li class="fragment">Implementing the feature</li>
-               <li class="fragment">Validating the behavior of the application using the description</li>
-               <li class="fragment">Lather, rinse, repeat</li>
-           </ul>
+          <h2>Definition (In Practice)</h2>
+          <p>Developing an application (as opposed to a unit of code) by:</p>
+          <ul>
+            <li class="fragment">Describing the behavior of a feature of our application</li>
+            <li class="fragment">Implementing the feature</li>
+            <li class="fragment">Validating the behavior of the application using the description</li>
+            <li class="fragment">Lather, rinse, repeat</li>
+          </ul>
+          <aside class="notes">
+            <p>You do not have to do test first, Behat can be used for more than just test first BDD</p>
+          </aside>
         </section>
 
         <section>
           <section>
             <h2>Describing The Behavior</h2>
-            <p></p>
           </section>
           <section>
             <h2>Gherkin</h2>
@@ -81,11 +93,11 @@
               homepage.feature
               <pre><code>
 Feature: Home Page
-  Tests the home page
+Tests the home page
 
-  Scenario: View home page
-    Given I am on "/"
-    Then I should see "Welcome to behat"
+Scenario: View home page
+  Given I am on "/"
+  Then I should see "Welcome to behat"
               </code></pre>
             </p>
             <p>
@@ -95,6 +107,14 @@ Feature: Home Page
                 <li>Then - Testable outcome</li>
               </ul>
             </p>
+            <aside class="notes">
+              <p>Descibe</p>
+              <ul>
+                <li>Feature per file</li>
+                <li>Multiple scenarios per feature</li>
+                <li>Multiple steps in a scenario</li>
+              </ul>
+            </aside>
           </section>
         </section>
 
@@ -106,6 +126,9 @@ Feature: Home Page
             <li class="fragment">Drupal Extension - Behat/Mink extension that provides Drupal specific behavior.</li>
             <li class="fragment">Behat Runner - Drupal module that makes it easy to discover and run Behat tests.</li>
           </ul>
+          <aside class="notes">
+            <p>Discuss use cases of Drupal Extention and Behat Runner</p>
+          </aside>
         </section>
 
         <section>
@@ -209,7 +232,8 @@ Feature: Home Page
           <section>
             <h2>Demo</h2>
             <aside class="notes">
-              Run the test passing and failing.
+              <p>Show the test website</p>
+              <p>Run the test passing and failing.</p>
             </aside>
           </section>
         </section>
@@ -234,12 +258,12 @@ drush brun
           <section>
             <h2>Demo</h2>
             <aside class="notes">
-              Show sites/default/files/behatrunner/behat.yml
-              Show sites/default/files/composer/composer.json
-              Show contents of sites/all/vendor
-              Demo listing and running the basic install test
-              Show admin pages for composer - admin/config/system/composer-manager
-              Show admin pages for behat runner - admin/config/development/behatrunner/scenarios
+              <p>Show sites/default/files/behatrunner/behat.yml</p>
+              <p>Show sites/default/files/composer/composer.json</p>
+              <p>Show contents of sites/all/vendor</p>
+              <p>Demo listing and running the basic install test</p>
+              <p>Show admin pages for composer - admin/config/system/composer-manager</p>
+              <p>Show admin pages for behat runner - admin/config/development/behatrunner/scenarios</p>
             </aside>
           </section>
         </section>
@@ -306,12 +330,12 @@ Feature: Home Page
           <section>
             <h2>Demo</h2>
             <aside class="notes">
-              Copy custom module to drupal install
-              enable drupal module
-              drush bls
-              drush brm
-              drush bls
-              drush brun
+              <p>Copy custom module to drupal install</p>
+              <p>enable drupal module</p>
+              <p>drush bls</p>
+              <p>drush brm</p>
+              <p>drush bls</p>
+              <p>drush brun</p>
             </aside>
           </section>
           <section>
@@ -342,6 +366,9 @@ function behat_talk_blog_behat_info() {
 }
               </code></pre>
             </p>
+            <aside class="notes">
+              <p>You do not want to use blah.behat.inc</p>
+            </aside>
           </section>
           <section>
             <h2>Features</h2>
@@ -367,11 +394,23 @@ Feature: Blog
               </code></pre>
             </p>
           </section>
+          <section>
+            <h2>Demo</h2>
+            <aside class="notes">
+              <p>Show test failing</p>
+              <p>Fix the view title</p>
+              <p>Recreate the feature</p>
+              <p>Show the test passing</p>
+            </aside>
+          </section>
         </section>
 
         <section>
           <section>
             <h2>Drupal Extension</h2>
+            <aside class="notes">
+              <p>We are going to describe the three "drivers" included with the Drupal Extension</p>
+            </aside>
           </section>
           <section>
             <h2>Blackbox Driver</h2>
@@ -382,11 +421,17 @@ Feature: Blog
               <ul><li class="fragment">I should see "About Us" in the "footer" region</li></ul>
             </p>
             <p class="fragment">Check for Drupal errors or messages</p>
+            <aside class="notes">
+              <p>Remote execution is possible because this (essentially) just hits the website via http</p>
+            </aside>
           </section>
           <section>
             <h2>Drush Driver</h2>
             <p class="fragment">Allows tests to be run as logged in users with specific roles</p>
             <p class="fragment">Server can be local or remote</p>
+            <aside class="notes">
+              <p>Remote execution works like any remote Drush command - ssh keys, config, etc.</p>
+            </aside>
           </section>
           <section>
             <h2>Drupal API Driver</h2>
