@@ -165,6 +165,9 @@ mkdir drupalcorn_behat
 composer install
               </code></pre>
             </p>
+            <aside class="notes">
+              <p>Expain what composer is and how it works.</p>
+            </aside>
           </section>
           <section>
             <h2>Standalone Behat</h2>
@@ -484,6 +487,74 @@ default:
           <section>
             <h2>Custom Subcontexts</h2>
             <p>Lets you write reusable step definitions for your modules</p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Mink Drivers</h2>
+          </section>
+          <section>
+            <h2>Goutte</h2>
+            <ul>
+              <li class="fragment">Pure PHP - No external dependencies</li>
+              <li class="fragment">Very fast</li>
+              <li class="fragment">No javascript support</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Zombie.js</h2>
+            <ul>
+              <li class="fragment">Requires Node.js</li>
+              <li class="fragment">Supports javascript</li>
+            </ul>
+          </section>
+          <section>
+            <h2>PhantomJS</h2>
+            <ul>
+              <li class="fragement">Headless WebKit browser (Goutte and Zombie.js use a custom DOM implementation)</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Selenium Server</h2>
+            <ul>
+              <li class="fragment">Requires java and a running Selenium server</li>
+              <li class="fragment">Mature and robust</li>
+              <li class="fragment">Common tool for automated browser tests</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Shameless Thievery</h2>
+            <p><a href="http://www.previousnext.com.au/blog/using-mink-web-testing" target="_blank">http://www.previousnext.com.au/blog/using-mink-web-testing</a></p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Getting Started</h2>
+          </section>
+          <section>
+            <h2>Just Set It Up</h2>
+            <p class="fragment">Install Behat standalone (with the Drupal Extension) or the Behat Runner module</p>
+            <p class="fragment">Use the Goutte Mink driver</p>
+            <p class="fragment">Create a single feature file with the simplest scenario you can think of</p>
+          </section>
+          <section>
+            <h2>Write Test For Bugs</h2>
+            <p class="fragment">Any time you get a bug report write the test first then fix it</p>
+          </section>
+          <section>
+            <h2>Automate It</h2>
+            <p class="fragment">Integrate the test with Jenkins/whatever to run when code is checked in</p>
+          </section>
+          <section>
+            <h2>Inculcate It</h2>
+            <p class="fragment">Make test reviews part of your code/build reviews</p>
+            <p class="fragment">When bug are maked as fixed ensure they have a test before they're closed</p>
+            <p class="fragment">Reward/shame team member create (or fail to create) tests</p>
+            <aside class="notes">
+              <p>Broken build trophy</p>
+            </aside>
           </section>
         </section>
 
