@@ -52,12 +52,15 @@
            <p>Setting Up The Tooling</p>
            <p>Getting Started With The Theme Build</p>
            <p>Alternatives</p>
+           <aside class="notes">
+             <p>Explain a bit about the motivation for this approach - custom sites</p>
+           </aside>
         </section>
 
         <section>
           <h2>Examples</h2>
-          <p>https://github.com/karlkedrovsky/drupal-sass-starter</p>
-          <p>https://github.com/karlkedrovsky/vagrant-starter</p>
+          <p><a href="https://github.com/karlkedrovsky/drupal-sass-starter" target="_blank">https://github.com/karlkedrovsky/drupal-sass-starter</a></p>
+          <p><a href="https://github.com/karlkedrovsky/vagrant-starter" target="_blank">https://github.com/karlkedrovsky/vagrant-starter</a></p>
         </section>
 
         <section>
@@ -69,7 +72,7 @@
             <p class="fragment">Mac or Linux - Already installed</p>
             <p class="fragment">Windows - http://rubyinstaller.org</p>
             <p class="fragment">Linux - Use the package manager</p>
-            <p class="fragment">My favorite - RVM (https://rvm.io)</p>
+            <p class="fragment">My favorite - RVM (<a href="https://rvm.io" target="_blank">https://rvm.io</a>)</p>
             <aside class="notes">
               <p>Why Ruby? - The language the original Sass processor was written in</p>
               <p>More recently there are things like libsass that make it easier to use other tools</p>
@@ -79,7 +82,7 @@
           <section>
             <h2>Sass</h2>
             <p>CSS extention language</p>
-            <p>http://sass-lang.com</p>
+            <p><a href="http://sass-lang.com" target="_blank">http://sass-lang.com</a></p>
           </section>
           <section>
             <h2>Compass</h2>
@@ -104,6 +107,12 @@
             <h2>GUI Tools</h2>
             <p>Scout - <a href="http://mhs.github.io/scout-app" target="_blank">http://mhs.github.io/scout-app</a> - Mac and Windows</p>
             <p>Compass.app - <a href="http://compass.kkbox.com" target="_blank">http://compass.kkbox.com</a> - Mac, Windows, and Linux</p>
+            <p>See the list at <a href="http://sass-lang.com/install" target="_blank">http://sass-lang.com/install</a></p>
+            <aside class="notes">
+              <p>The list as the Sass site don't all necessarily support Compass</p>
+              <p>Scout and Compass.app were recommended on the Compass site</p>
+              <p>Scout and Compass.app take care of the file listening (like Guard) and may not support everything we're going to look at today.</p>
+            </aside>
           </section>
         </section>
 
@@ -136,6 +145,7 @@ bundle install
             </p>
             <aside class="notes">
               <p>You won't see the sass gem - compass is specifically written to use sass and requires it by itself</p>
+              <p>Point out versions</p>
             </aside>
           </section>
           <section>
@@ -281,6 +291,25 @@ sass                                    css
           </section>
           <section>
             <h2>Setup</h2>
+            <p>wysiwyg.scss</p>
+            <p>
+              <pre><code>
+// Library imports
+@import "compass/css3";
+@import "compass/typography";
+@import "breakpoint";
+
+// Project imports
+@import "variables";
+@import "global_and_wysiwyg";
+@import "content";
+
+@include establish-baseline;
+              </code></pre>
+            </p>
+          </section>
+          <section>
+            <h2>Setup</h2>
             <p>_variables.scss</p>
             <p>
               <pre><code class="scss">
@@ -336,6 +365,7 @@ $susy: (
             </ul>
             <p><a href="http://bourbon.io" target="_blank">http://bourbon.io</a></p>
             <aside class="notes">
+              <p>Bourbon is a mixin library, Neat is a grid framework (e.g. Susy), Bitters is scaffold styles, variables, structure (sane defaults)</p>
               <p>Seems common for folks that do front end work, not just Drupal</p>
               <p>Additional functionality can be added with the build system (e.g. guard, grunt, gulp)</p>
               <p>Might be better if you want more choices regarding the functionality provided by compass</p>
