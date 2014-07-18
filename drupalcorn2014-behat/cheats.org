@@ -17,3 +17,20 @@ Feature: Blog
     | First Post | Sample body content |
     When I go to "blog"
     Then I should see "First Post"
+
+* blog.feature page
+
+  @api
+  Scenario: Blog pager
+    Given "blog_post" nodes:
+    | title       | body                |
+    | First Post  | Sample body content |
+    | Second Post | Sample body content |
+    | Third Post  | Sample body content |
+    | Fourth Post | Sample body content |
+    When I go to "blog"
+    Then I should see "First Post"
+     And I should see "Second Post"
+     And I should see "Third Post"
+     And I should not see "Fourth Post"
+

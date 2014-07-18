@@ -5,3 +5,4 @@
  */
 
 include_once 'behat_talk_blog.features.inc';
+include_once 'behat_talk_blog.behat_tests.inc';
