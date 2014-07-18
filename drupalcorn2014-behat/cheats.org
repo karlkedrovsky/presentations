@@ -18,7 +18,7 @@ Feature: Blog
     When I go to "blog"
     Then I should see "First Post"
 
-* blog.feature page
+* blog.feature pager
 
   @api
   Scenario: Blog pager
