@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>Template.php</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/karl.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+
+        <section>
+          <h2>Template.php Tips, Tricks, and Best Practices</h2>
+        </section>
+
+        <section>
+          <h2>Guiding Principles</h2>
+            <ul>
+              <li class="fragment">Templates are for HTML and data.</li>
+              <li class="fragment">Logic beyond if statements and loops doesn't belong in a template.</li>
+              <li class="fragment">The template.php file is for logic not HTML.</li>
+              <li class="fragment">Stick to normal/Drupal constructs and templates when possible.</li>
+          </p>
+        </section>
+
+        <section>
+          <h2>Know Your $variables</h2>
+          <ul>
+            <li>PHP Console module</li>
+          </ul>
+        </section>
+
+        <section>
+          <section>
+            <h2>Pre-Processing Functions</h2>
+            <ul>
+              <li>HTML</li>
+              <li>Page</li>
+              <li>Node</li>
+              <li>Field</li>
+              <li>Views</li>
+            </ul>
+          </section>
+          <section>
+            <h2>hook_preprocess_html</h2>
+            <ul>
+              <li class="fragment">Add classes to body tag.</li>
+              <li class="fragment">Adding bits to the head of the page.</li>
+              <li class="fragment">Adding global javascript/css.</li>
+            </ul>
+          </section>
+          <section>
+            <h2>hook_preprocess_html</h2>
+            <p>Adding an element to the head.</p>
+            <pre><code>
+$viewport = array(
+ '#tag' => 'meta',
+ '#attributes' => array(
+   'name' => 'viewport',
+   'content' => 'width=device-width, initial-scale=1, maximum-scale=1',
+ ),
+);
+drupal_add_html_head($viewport, 'viewport');
+            </code></pre>
+          </section>
+          <section>
+            <h2>hook_preprocess_html</h2>
+            <p>Adding a javascript variable</p>
+            <pre><code>
+drupal_add_js(array('analytics' => array('page_title' => drupal_get_title())), 'setting');
+            </code></pre>
+          </section>            
+          <section>
+            <h2>hook_preprocess_page</h2>
+            <p>Update page rendering/layout</p>
+            <pre><code>
+if (module_exists('i18n')) {
+  $main_menu_tree = i18n_menu_translated_tree(variable_get('menu_main_links_source', 'main-menu'));
+} else {
+  $main_menu_tree = menu_tree(variable_get('menu_main_links_source', 'main-menu'));
+}
+            </code></pre>
+          </section>
+          <section>
+            <h2>hook_preprocess_page</h2>
+            <p>The $variables array contains the node if rendering a node. This allows you to control the page layout based on node settings.</p>
+            <p>For example - Checkbox on the node form allowing content managers to hide regions.</p>
+          </section>
+          <section>
+            <h2>hook_preprocess_node</h2>
+            <ul>
+              <li>Alter node content (duh).</li>
+              <li>Add/remove css classes.</li>
+              <li>Add additional variables.</li>
+            </ul>
+          </section>
+          <section>
+            <h2>hook_preprocess_node</h2>
+            <p>Remove bits we never want to display</p>
+            <pre><code>
+foreach (array('comments', 'links') as $content_key) {
+  if (array_key_exists($content_key, $variables['content'])) {
+    unset($variables['content'][$content_key]);
+  }
+}
+            </code></pre>
+          </section>
+          <section>
+            <h2>Adding Classes</h2>
+            <pre><code>
+$variables['classes_array'][] = 'red';
+            </code></pre>
+          </section>
+          <section>
+            <h2>hook_preprocess_node</h2>
+            <p>Per content type function</p>
+            <pre><code>
+  if (isset($variables['type'])) {
+    $function = 'foo_preprocess_node__' . $variables['type'];
+    if (function_exists($function)) {
+     $function($variables);
+    }
+  }
+            </code></pre>
+          </section>
+          <section>
+            <h2>hook_preprocess_field</h2>
+            <ul>
+              <li>Add javascript or css only if a field exists.</li>
+              <li>Add/remove css classes.</li>
+              <li>Alter the markup used for a field.</li>
+            </ul>
+          </section>
+          <section>
+            <h2>hook_preprocess_field</h2>
+            <pre><code>
+function foo_field__field_byline(&$variables) {
+  $variables['items'][0]['#markup'] = '<span class="byline">' .
+    $variables['items'][0]['#markup'] . '</span>';
+  return theme_field($variables);
+}
+            </code></pre>
+            <p>vs</p>
+            <pre><code>
+<span class="byline"><?php print render($item); ?></span>
+            </code></pre>
+          </section>
+        </section>
+
+        <section>
+          <h2>Theme Suggestions - Specifying Templates</h2>
+          <p>Allows you to specify the template used to render the HTML, page, node, field, etc.</p>
+          <ul>
+            <li>Render a node type using multiple templates depending on field data.</li>
+            <li>Use the same template to render multiple node types.</li>
+          </ul>
+          <p>The theme_hook_suggestions array is checked "last first".</p>
+        </section>
+
+        <section>
+          <h2>Best Practices</h2>
+          <p class="fragment">I ran out of time... :-(</p>
+        </section>
+
+        <section>
+          <h2>Resources</h2>
+          <ul>
+            <li>PHP Console Module - https://www.drupal.org/project/pc</li>
+            <li>Entity Metadata Wrapper - http://www.mediacurrent.com/blog/entity-metadata-wrapper</li>
+            <li>Theme Suggestions - https://www.drupal.org/node/1089656</li>
+          </ul>
+        </section>
+
+      </div>
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/notes/notes.js', async: true }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
