@@ -1,0 +1,405 @@
+!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>Sculpin and Drupal</title>
+
+    <meta name="description" content="A look at the static site generator Sculpin from a Drupal point of view.">
+    <meta name="author" content="Karl Kedrovsky">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+        <section>
+          <h1>Sculpin and Drupal</h1>
+          <p>
+            <small><a href="http://www.kedrovsky.com">Karl Kedrovsky</a></small><br>
+            <small><a href="http://www.vml.com">VML</a></small><br>
+            <small><a href="mailto:karl.kedrovsky@vml.com">karl.kedrovsky@vml.com</a></small><br>
+            <small><a href="mailto:karl@kedrovsky.com">karl@kedrovsky.com</a></small><br>
+            <small><a href="https://twitter.com/karlkedrovsky">@karlkedrovsky</a></small>
+          </p>
+        </section>
+        <section>
+          <h1>Goals</h1>
+          <p><ul>
+            <li class="fragment">Understand how Sculpin works</li>
+            <li class="fragment">Tips or "Best practices" for Drupal developers</li>
+            <li class="fragment">Extending Sculpin / Integrating with Drupal</li>
+          </ul></p>
+        </section>
+        <section>
+          <h1>Overview</h1>
+          <p><ul>
+            <li class="fragment">Why Sculpin For Drupalistas</li>
+            <li class="fragment">Setup and Installation</li>
+            <li class="fragment">How Sculpin Works</li>
+            <li class="fragment">Integrating With Drupal</li>
+          </ul></p>
+        </section>
+        <section>
+          <h1>Why A Static Site (Generator)?</h1>
+          <p>
+            <ul>
+              <li class="fragment">MUCH simpler than a CMS</li>
+              <li class="fragment">Easier and cheaper to deploy</li>
+              <li class="fragment">More secure</li>
+              <li class="fragment">Faster and easier to scale</li>
+              <li class="fragment">A generator lets you use a static site on larger projects</li>
+              <li class="fragment">Helps you avoid The Golden Hammer</li>
+            </ul>
+          </p>
+        </section>
+        <section>
+          <h1>Why Sculpin?</h1>
+          <p>
+            Out of the 398 static site generators (staticsitegenerators.net) why pick Sculpin?
+            <ul>
+              <li class="fragment">Well supported and maintained</li>
+              <li class="fragment">General purpose</li>
+              <li class="fragment">Extendable</li>
+            </ul>
+          </p>
+        </section>
+        <section>
+          <h1>Why Sculpin?</h1>
+          <h2>Technology</h2>
+          <p>
+            <ul>
+              <li class="fragment">Written in PHP</li>
+              <li class="fragment">Uses modern PHP tooling</li>
+              <li class="fragment">Leverages Symfony components (yay Drupal 8!)</li>
+              <li class="fragment">Themes/templates use Twig (yay Drupal 8!)</li>
+              <li class="fragment">Config files are in YAML (yay Drupal 8!)</li>
+            </ul>
+          </p>
+        </section>
+        <section>
+          <h1>Setup and Installation</h1>
+          <p>
+            <ol>
+              <li class="fragment">Download and install the Sculpin executable (PHAR file)</li>
+              <li class="fragment">Create a simple directory structure</li>
+              <li class="fragment">Create a file in the right directory</li>
+              <li class="fragment">run 'sculpin generate'</li>
+            </ol>
+          </p>
+        </section>
+        <section>
+          <h1>Download And Install Sculpin</h1>
+          <p>
+            <ul>
+              <li>curl -O https://download.sculpin.io/sculpin.phar</li>
+              <li>chmod +x sculpin.phar</li>
+              <li>mv sculpin.phar ~/bin/sculpin</li>
+              <li>PATH=$PATH:$HOME/bin</li>
+            </ul>
+          </p>
+        </section>
+        <section>
+          <h1>Directory Structure</h1>
+          <p>
+            Two options:
+            <ol>
+              <li class="fragment">Use a starter kit</li>
+              <li class="fragment">Create the files and directories yourself</li>
+            </ol>
+          </p>
+        </section>
+        <section>
+          <h1>DEMO!</h1>
+	  <aside class="notes">
+            <p>Demo 1</p>
+            <ul>
+              <li>mkdir drupalcorn-sculpin</li>
+              <li>cd drupalcorn-sculpin</li>
+              <li>mkdir source</li>
+              <li>create source/test.md and generate</li>
+              <li>demo --watch --server</li>
+              <li>remove the test.md file and output_dev</li>
+            </ul>
+	  </aside>
+        </section>
+        <section>
+          <h1>How Sculpin Works</h1>
+          <h2>Configuration Files</h2>
+          <p>
+            <ul>
+              <li class="fragment">Two files, both under app/config</li>
+              <li class="fragment">sculpin_kernel.yml - settings for file generation</li>
+              <li class="fragment">sculpin_site.yml - settings for the site itself</li>
+              <li class="fragment">Both are optional and only used to add meta data or override defaults</li>
+              <li class="fragment">Can have per-environment site files - sculpin_site_prod.yml</li>
+            </ul>
+          </p>
+        </section>
+        <section>
+          <h1>DEMO!</h1>
+	  <aside class="notes">
+            <p>Demo 2</p>
+            <ul>
+              <li>mkdir -p app/config</li>
+              <li>Create sculpin_kernel.yml turning off posts (copy from demo2)</li>
+              <li>Create sculpin_site.yml adding a title (copy from demo2)</li>
+            </ul>
+	  </aside>
+        </section>
+        <section>
+          <h1>How Sculpin Works</h1>
+          <h2>Sources</h2>
+          <p>
+            <ul>
+              <li>Sources are files under the the "source" directory</li>
+            </ul>
+          </p>
+        </section>
+        <section>
+          <h1>How Sculpin Works</h1>
+          <h2>Sources</h2>
+          <p>
+            How source files are handled.
+            <ol>
+              <li class="fragment">Markdown translated to HTML</li>
+              <li class="fragment">
+                Files without "front matter"
+                <ul>
+                  <li class="fragment">Copied as-is</li>
+                </ul>
+              </li>
+              <li class="fragment">
+                Files with "front matter"
+                <ul>
+                  <li class="fragment">Processed - templates, URLs, etc.</li>
+                </ul>
+              </li>
+            </ol>
+          </p>
+        </section>
+        <section>
+          <h1>DEMO!</h1>
+	  <aside class="notes">
+            <p>Demo 3</p>
+            <ul>
+              <li>Copy readme.txt, index.md, and test.html from demo3</li>
+              <li>look in both files</li>
+              <li>Run: sculpin generate</li>
+              <li>tree and look into files</li>
+              <li>Add front matter to all three and run sculpin generate</li>
+              <li>tree and look into files</li>
+            </ul>
+	  </aside>
+        </section>
+        <section>
+          <h1>How Sculpin Works</h1>
+          <h2>Templating</h2>
+          <p>
+            There are two ways to organize your templates, css, etc.
+            <ol>
+              <li class="fragment">Basic - In subdirectories directly under "source"</li>
+              <li class="fragment">Theme - In a theme sub-directory under "source"</li>
+            </ol>
+          </p>
+        </section>
+        <section>
+          <h1>How Sculpin Works</h1>
+          <h2>Templating</h2>
+          <div style="width:45%; float:left;">
+            <pre>
+ source
+ ├── _includes
+ ├── _layouts
+ ├── _partials
+ └── _views
+            </pre>
+          </div>
+          <div style="width:45%; float:left;">
+            <pre>
+ source
+ └── themes
+   └── karlkedrovsky
+     └── drupalcorn
+       ├── _includes
+       ├── _layouts
+       ├── _partials
+       └── _views
+            </pre>
+          </div>
+	  <aside class="notes">
+            <ul>
+              <li><strong>Note:</strong> themes are namespaces - vendor/name</li>
+              <li>Directories are just the defaults. Can be anything and just the list of places Sculpin looks for template files</li>
+            </ul>
+          </aside>
+        </section>
+        <section>
+          <h1>DEMO!</h1>
+	  <aside class="notes">
+            <p>Demo 4</p>
+            <ul>
+              <li>Copy theme from demo4</li>
+              <li>Copy sculpin_kernel.yml from demo4</li>
+              <li>go over - layout, theme files, sculpin_kernel.yml</li>
+              <li>run sculpin generate --watch --server and show that nothing changed</li>
+              <li>Add layout: default to front matter, generate, and show that things changed</li>
+              <li>Look in HTML to see title tag (from sculpin_site.yml)</li>
+              <li>optional: add a variable to front matter in index.md and default layout</li>
+            </ul>
+	  </aside>
+        </section>
+        <section>
+          <h1>Content Types</h1>
+          <p>
+            <ul>
+              <li class="fragment">
+                Content type based on one of two things:
+                <ul>
+                  <li class="fragment">Path - subdirectory of "source"</li>
+                  <li class="fragment">Meta - Key from "front matter"</li>
+                </ul>
+              </li>
+              <li class="fragment">Different default layout</li>
+              <li class="fragment">Different permalink (URL)</li>
+              <li class="fragment">Etc.</li>
+            </ul>
+          </p>
+        </section>
+        <section>
+          <h1>DEMO!</h1>
+	  <aside class="notes">
+            <p>Demo 5</p>
+            <ul>
+              <li>Copy demo5/app/config/sculpin_kernel.yml</li>
+              <li>Copy demo5/source/_drupalsites</li>
+              <li>Copy drupalsite.html.twig theme file</li>
+              <li>Cover - new config, testsite1.md, layout file</li>
+              <li>Config uses default for path/meta, directory</li>
+            </ul>
+	  </aside>
+        </section>
+        <section>
+          <h1>Integrating With Drupal</h1>
+          <p>
+            <ul>
+              <li class="fragment">Don't fight the tool (use pages)</li>
+              <li class="fragment">Keep in mind we're bending the tool a bit</li>
+              <li class="fragment">Can be good for things like consilidating info from multiple sites.</li>
+            </ul>
+          </p>
+        </section>
+        <section>
+          <h1>Integrating With Drupal</h1>
+          <h2>Options</h2>
+          <p>
+            <ul>
+              <li class="fragment">Create a custom Symfony bundle</li>
+              <li class="fragment">Create a Twig extension</li>
+            </ul>
+          </p>
+        </section>
+        <section>
+          <h1>DEMO!</h1>
+	  <aside class="notes">
+            <p>Demo 6</p>
+            <ul>
+              <li>Copy demo6/source/_drupalsites/testsite1.md</li>
+              <li>Copy demo6/.../drupalsite.html.twig</li>
+              <li>Copy demo6/app bits</li>
+              <li>Copy sculpin.json and .sculpin</li>
+              <li>Things in .sculpin are installed by using "sculpin install"</li>
+              <li>Review new source file and template</li>
+              <li>Review DrupalInfo</li>
+              <li>Review DrupalBundle, DependencyInjection, services.yml, SculpinKernel.php</li>
+            </ul>
+	  </aside>
+        </section>
+        <section>
+          <h1>Integrating With Drupal</h1>
+          <p>
+            <ul>
+              <li class="fragment">SculpinKernel.php loads DrupalBundle</li>
+              <li class="fragment">DrupalBundle loads DependencyInjection/DrupalExtension.php</li>
+              <li class="fragment">DrupalExtension specifies services.yml</li>
+              <li class="fragment">servcies.yml specifies the new Twig functions</li>
+            </ul>
+          </p>
+        </section>
+        <section>
+          <h1>Resources</h1>
+          <p>
+            <ul>
+              <li><a href="https://sculpin.io/">Sculpin Website</a></li>
+              <li><a href="http://whateverthing.com/blog/2015/07/21/sculpin-snippets-with-twig-macros/">Sculpin and Twig Macros</a></li>
+              <li><a href="http://drupalcampnorth.org/session/test-drive-twig-sculpin">Test Drive Twig With Sculpin</a></li>
+              <li><a href="https://github.com/beryllium/icelus">Example Twig extension for Sculpin</a></li>
+              <li>#sculpin on freenode.net</li>
+            </ul>
+          </p>
+        </section>
+        <section>
+          <h1>Thank You!</h1>
+          <h2>Questions?</h2>
+        </section>
+      </div>
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/notes/notes.js', async: true }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
