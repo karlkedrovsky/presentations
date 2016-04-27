@@ -1,0 +1,164 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Console and Custom Modules</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+     var link = document.createElement( 'link' );
+     link.rel = 'stylesheet';
+     link.type = 'text/css';
+     link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+     document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+	<section>
+          <h1>Drupal Console and Custom Modules</h1>
+        </section>
+	<section>
+          <h1>Console</h1>
+          <p>
+            <ul>
+              <li class="fragment">Not a replacement for Drush (for everything)</li>
+              <li class="fragment">Use to create Drupal components</li>
+              <li class="fragment">Lots of overlap with Drush</li>
+            </ul>
+          </p>
+        </section>
+	<section>
+          <h1>Console - Available Commands</h1>
+          <p>There are 199 of them...</p>
+          <aside class="notes">
+            Look at them after installing a D8 site to get the whole list.
+          </aside>
+        </section>
+        <section>
+          <h1>D8 Modules</h1>
+          <p>
+            A few new concepts
+            <ul>
+              <li class="fragment">Controllers</li>
+              <li class="fragment">Routes</li>
+              <li class="fragment">Services</li>
+              <li class="fragment">Plugins</li>
+            </ul>
+          </p>
+        </section>
+        <section>
+          <h1>D8 Modules</h1>
+          <p>
+            Set up a test Drupal 8 site
+            <pre><code class="shell">
+composer create-project acquia/lightning-project:^8.1.0 console --no-interaction --stability rc
+            </code></pre>
+          </p>
+          <aside class="notes">
+            <ul>
+              <li>Update file permissions and install</li>
+              <li>Copy settings from backup</li>
+              <li>Also add the devel module and enable it.</li>
+            </ul>
+          </aside>
+        </section>
+        <section>
+          <h1>D8 Modules</h1>
+          <p>
+            Generate one with:
+            <pre><code class="shell">
+drupal generate:module
+            </code></pre>
+          </p>
+        </section>
+        <section>
+          <h1>D8 Modules</h1>
+          <p>
+            Install (enable) with:
+            <pre><code class="shell">
+drupal module:install bolivar
+            </code></pre>
+          </p>
+        </section>
+        <section>
+          <h1>Controllers</h1>
+          <p>
+            Like hook_menu, only way better. Create one with:
+            <pre><code class="shell">
+drupal generate:controller
+            </code></pre>
+          </p>
+        </section>
+        <section>
+          <h1>Adding Another Route</h1>
+        </section>
+        <section>
+          <h1>Adding A Default Theme File</h1>
+        </section>
+        <section>
+          <h1>Services</h1>
+          <p>Reusable functionality</p>
+          <p>Replaces globals from D7, and a whole lot more</p>
+        </section>
+        <section>
+          <h1>Creating A Service</h1>
+          <p>
+            <pre><code class="shell">
+drupal generate:module
+drupal generate:service
+            </code></pre>
+          </p>
+        </section>
+        <section>
+          <h1>Plugins</h1>
+          <p>Allows modules to provide additional "things" to the system and other modules</p>
+          <p class="fragment">Like blocks</p>
+        </section>
+        <section>
+          <h1>Links</h1>
+          <ul>
+            <li><a href="https://www.gitbook.com/book/hechoendrupal/drupal-console">Drupal Console Docs</a></li>
+            <li><a href="http://drupalconsole.com/cheatsheet/">Drupal Console Cheat Sheet</a></li>
+            <li><a href="https://ffwagency.com/blog/drupal-console-an-overview-of-new-drupal-cli">Drupal Console Overview</a></li>
+            <li><a href="http://2016.midcamp.org/session/custom-modules-how-we-do-it-drupal-8">Midcamp 2016 Drupal 8 Modules Presentation</a></li>
+            <li><a href="http://www.sitepoint.com/building-drupal-8-module-configuration-management-service-container/">Service Containers</a></li>
+            <li><a href="https://drupalize.me/blog/201601/new-tutorials-drupal-8-module-development">Drupalize.me D8 Module Development</a></li>
+            <li><a href="https://ffwagency.com/blog/drupal-8-services-dependency-injection-and-decoupling-your-code">D8 Services</a></li>
+            <li><a href="https://drupalize.me/blog/201409/unravelling-drupal-8-plugin-system">D8 Plugins</a></li>
+          </ul>
+        </section>
+	<section>
+          <h1>The End</h1>
+        </section>
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+     // More info https://github.com/hakimel/reveal.js#configuration
+     Reveal.initialize({
+       history: true,
+
+       // More info https://github.com/hakimel/reveal.js#dependencies
+       dependencies: [
+	 { src: 'plugin/markdown/marked.js' },
+	 { src: 'plugin/markdown/markdown.js' },
+	 { src: 'plugin/notes/notes.js', async: true },
+	 { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+       ]
+     });
+    </script>
+  </body>
+</html>
