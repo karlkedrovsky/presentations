@@ -67,8 +67,8 @@
             <h1>Vue.js</h1>
           </section>
           <section>
-            <h2>Two Way Binding</h2>
-            <pre><code class="hljs">
+            <h2>Data Binding</h2>
+            <pre><code>
 <div class="row" id="app">
   <div class="medium-6 column">
     <p>
@@ -86,8 +86,8 @@
             </code></pre>
           </section>
           <section>
-            <h2>Two Way Binding</h2>
-            <pre><code class="hljs">
+            <h2>Data Binding</h2>
+            <pre><code class="js">
 new Vue({
   el: '#app',
   data: {
@@ -97,16 +97,145 @@ new Vue({
             </code></pre>
           </section>
           <section>
+            <h2>Data Binding</h2>
+            <p>Demo</p>
+            <p><img src="images/scared-face.png" class="plain" height="200px" width="200px" /></p>
+          </section>
+          <section>
+            <h2>Methods</h2>
+            <pre><code>
+<div class="row" id="app">
+  <div class="medium-6 column">
+    <p>
+      <button class="button" v-on:click="add()">Add</button>
+    </p>
+  </div>
+  <div class="medium-6 column">
+    <p>
+      Count: {{ count }}
+    </p>
+  </div>
+</div>
+            </code></pre>
+          </section>
+          <section>
+            <h2>Methods</h2>
+            <pre><code class="js">
+new Vue({
+  el: '#app',
+  data: {
+    count: 0
+  },
+  methods: {
+    add: function() {
+      this.count++;
+    }
+  }
+});
+            </code></pre>
+          </section>
+          <section>
+            <h2>Methods</h2>
+            <p>Demo</p>
+            <p><img src="images/scared-face.png" class="plain" height="200px" width="200px" /></p>
+          </section>
+          <section>
+            <h2>Components</h2>
+            <p>
+              <ul>
+                <li class="fragment">Extends HTML (new tags)</li>
+                <li class="fragment">Encapsulates reusable code</li>
+              </ul>
+            </p>
+          </section>
+          <section>
+            <h2>Components</h2>
+            <pre><code>
+<div class="row" id="app">
+  <div class="medium-6 column">
+    <foo></foo>
+  </div>
+  <div class="medium-6 column">
+    <bar></bar>
+  </div>
+</div>
+            </code></pre>
+          </section>
+          <section>
+            <h2>Components</h2>
+            <pre><code class="js">
+var Foo = Vue.extend({
+  template: '<p>The Foo Component</p>'
+});
+Vue.component('foo', Foo);
+
+var Bar = Vue.extend({
+  template: '<p>The Bar Component</p>'
+});
+Vue.component('bar', Bar);
+
+new Vue({
+  el: '#app'
+});
+            </code></pre>
+          </section>
+          <section>
+            <h2>Child Components</h2>
+            <pre><code>
+<div class="row" id="app">
+  <div class="medium-6 column">
+    <foo></foo>
+  </div>
+  <div class="medium-6 column">
+    <bar></bar>
+  </div>
+</div>
+            </code></pre>
+          </section>
+          <section>
+            <h2>Child Components</h2>
+            <pre><code class="js">
+var SpawnOfFoo = Vue.extend({
+  template: '<p>The Spawn Of Foo Component</p>'
+});
+
+var Foo = Vue.extend({
+  template: '<p>The Foo Component</p><p><spawn-of-foo></spawn-of-foo></p>',
+  components: {
+    'spawn-of-foo': SpawnOfFoo
+  }
+});
+Vue.component('foo', Foo);
+
+var Bar = Vue.extend({
+  template: '<p>The Bar Component</p>'
+});
+Vue.component('bar', Bar);
+
+new Vue({
+  el: '#app'
+});
+            </code></pre>
+          </section>
+          <section>
             <h2>Routing</h2>
           </section>
           <section>
             <h2>Resources</h2>
           </section>
+        </section>
+        <section>
           <section>
-            <h2>Components</h2>
+            <h1>Drupal Integration></h1>
           </section>
           <section>
-            <h2>Events</h2>
+            <h2>Adding Components</h2>
+          </section>
+          <section>
+            <h2>Passing Variables To Vue</h2>
+          </section>
+          <section>
+            <h2>Integrating REST Services</h2>
           </section>
         </section>
 	<section>
