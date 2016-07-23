@@ -145,6 +145,7 @@ new Vue({
               <ul>
                 <li class="fragment">Extends HTML (new tags)</li>
                 <li class="fragment">Encapsulates reusable code</li>
+                <li class="fragment">Groups template, Javascript, and styles into one file</li>
               </ul>
             </p>
           </section>
@@ -178,6 +179,11 @@ new Vue({
   el: '#app'
 });
             </code></pre>
+          </section>
+          <section>
+            <h2>Components</h2>
+            <p>Demo</p>
+            <p><img src="images/scared-face.png" class="plain" height="200px" width="200px" /></p>
           </section>
           <section>
             <h2>Child Components</h2>
@@ -218,6 +224,100 @@ new Vue({
             </code></pre>
           </section>
           <section>
+            <h2>Child Components</h2>
+            <p>Demo</p>
+            <p><img src="images/scared-face.png" class="plain" height="200px" width="200px" /></p>
+          </section>
+          <section>
+            <h2>Single File Components</h2>
+            <p>
+              <ul>
+                <li class="fragment">Groups template, scripts, and styles in a single file</li>
+                <li class="fragment">Requires a pre-processor (typically Webpack)</li>
+                <li class="fragment">Templates can be HTML or other language like Jade</li>
+                <li class="fragment">Scripts can be Javascript, CoffeeScript, etc.</li>
+                <li class="fragment">Styles can be CSS, Sass, etc.</li>
+              </ul>
+          </section>
+          <section>
+            <h2>Single Components</h2>
+            <pre><code>
+<template>
+  <h1>Demo Component</h1>
+  <p class="red">{{ message }}</p>
+</template>
+<script>
+  export default {
+   name: "Demo",
+   data() {
+     return {
+       message: "Woohoo!"
+     }
+   }
+ }
+</script>
+<style>
+ .red {
+   color: #ee2222;
+ };
+</style>
+            </code></pre>
+          </section> 
+          <section>
+            <h2>Single Components</h2>
+            <pre><code lang="js">
+import Vue from 'vue';
+
+import Demo from './components/demo.vue';
+
+new Vue({
+  el: '#app',
+  components: {
+    Demo
+  }
+});
+            </code></pre>
+          </section> 
+          <section>
+            <h2>Single Components</h2>
+            <pre><code class="js">
+gulp.task('webpack', function() {
+  return gulp.src('js_sfc/sfc.js')
+    .pipe(webpack({
+      module: {
+        loaders: [
+          {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            loader: 'babel'
+          },
+          {
+            test: /\.vue$/,
+            loader: 'vue'
+          }
+        ]
+      },
+      babel: {
+        presets: ['es2015'],
+        plugins: ['transform-runtime']
+      },
+      resolve: {
+        modulesDirectories: ['node_modules']
+      },
+      output: {
+        filename: 'sfc.js'
+      }
+    }))
+    .pipe(gulp.dest('web/js/'));
+});
+            </code></pre>
+          </section>
+          <section>
+            <h2>Single File Components</h2>
+            <p>Demo</p>
+            <p><img src="images/scared-face.png" class="plain" height="200px" width="200px" /></p>
+          </section>
+          <section>
             <h2>Routing</h2>
           </section>
           <section>
@@ -226,7 +326,7 @@ new Vue({
         </section>
         <section>
           <section>
-            <h1>Drupal Integration></h1>
+            <h1>Drupal Integration</h1>
           </section>
           <section>
             <h2>Adding Components</h2>
