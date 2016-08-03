@@ -497,6 +497,27 @@ new Vue({
 	    </aside>
           </section>
           <section>
+            <h1>Events and Resource</h1>
+          </section>
+          <section>
+            <h2>Events</h2>
+            <p>
+              <ul>
+                <li class="fragment">Notifications and data between components</li>
+                <li class="fragment">Child components pass events up to parents</li>
+                <li class="fragment">Parents pass events down to children</li>
+              </ul>
+            </p>
+          </section>
+          <section>
+            <h2>Resources</h2>
+            <p>
+              <ul>
+                <li class="fragment">Vue plugin to handle web requests</li>
+              </ul>
+            </p>
+          </section>
+          <section>
             <h2>Integrating REST Services</h2>
             <ul>
               <li class="fragment">Use Vue Resource library for getting data from Drupal</li>
@@ -512,10 +533,64 @@ new Vue({
           </section>
           <section>
             <h2>Integrating REST Services</h2>
-            <h3>A Page For The Cats</h3>
-            <p>
-              <img src="images/screenshot_page.png" />
-            </p>
+            <h3>A Cat Page - cat.vue</h3>
+            <pre><code>
+<template>
+  <div>
+    <h2>{{ title }}</h2>
+    {{{ picture }}}
+  </div>
+</template>
+<script>
+ export default {
+   name: "Cat",
+   data() {
+     return {
+       title: "Let's see some cats!",
+       picture: "A cat picture goes here."
+     }
+   },
+   ready() {
+     this.$on('new-cat', function(newCat) {
+       this.title = newCat.title;
+       this.picture = newCat.field_picture;
+     });
+   }
+ }
+</script>
+            </code></pre>
+          </section>
+          <section>
+            <h2>Integrating REST Services</h2>
+            <h3>A Cat Page - main.js</h3>
+            <pre><code>
+import Vue from 'vue';
+import VueResource from 'vue-resource';
+
+Vue.use(VueResource);
+
+import Demo from './components/demo.vue';
+import Cat from './components/cat.vue';
+
+new Vue({
+  el: '#page',
+  components: {
+    Demo,
+    Cat
+  }
+});
+            </code></pre>
+          </section>
+          <section>
+            <h2>Integrating REST Services</h2>
+            <h3>Demo</h3>
+            <p><img src="images/scared-face.png" class="plain" height="200px" width="200px" /></p>
+	    <aside class="notes">
+              <ul>
+                <li>Copy main_2.js to main.js</li>
+                <li>Add a "cat" vue page, with a menu to /cat</li>
+              </ul>
+	    </aside>
           </section>
           <section>
             <h2>Integrating REST Services</h2>
@@ -536,7 +611,7 @@ new Vue({
           </section>
           <section>
             <h2>Integrating REST Services</h2>
-            <h3>The Cats Component</h3>
+            <h3>The Cat List - cats.vue</h3>
             <pre><code lang="js">
 <template>
   <div>
@@ -551,19 +626,16 @@ new Vue({
   </div>
 </template>
 <script>
- import VueRouter from 'vue-router';
  export default {
    name: "Cats",
    data() {
      return {
-       cats: {},
-       current_cat: ""
+       cats: {}
      }
    },
    ready() {
      Vue.http.get('/api/cats').then((response) => {
-       var cats = response.json();
-       this.cats = cats;
+       this.cats = response.json();
      }, (response) => {
        console.log('Error');
      });
@@ -584,123 +656,110 @@ new Vue({
           </section>
           <section>
             <h2>Integrating REST Services</h2>
-            <p>Demo</p>
-            <p><img src="images/scared-face.png" class="plain" height="200px" width="200px" /></p>
-	    <aside class="notes">
-              <ul>
-                <li>Drupal View producing json</li>
-                <li>Custom block for the component</li>
-                <li>main.js adding the component</li>
-              </ul>
-	    </aside>
-          </section>
-          <section>
-            <h2>Events</h2>
-            <p>
-              <ul>
-                <li class="fragment">Notifications and data between components</li>
-                <li class="fragment">Child components pass events up to parents</li>
-                <li class="fragment">Parents pass events down to children</li>
-              </ul>
-            </p>
-          </section>
-          <section>
-            <h2>Events</h2>
-            <p>Pages listing:</p>
-            <pre><code lang="js">
-<template>
-  <div>
-    <h2>Pages</h2>
-    <p>
-      <ul>
-        <li v-for="page in pages">
-          <a v-on:click="loadPage(page)">{{ page.title }}</a>
-        </li>
-      </ul>
-    </p>
-  </div>
-</template>
-<script>
- import VueRouter from 'vue-router';
- export default {
-   name: "Pages",
-   data() {
-     return {
-       pages: {},
-       current_page: ""
-     }
-   },
-   ready() {
-     Vue.http.get('/api/pages').then((response) => {
-       var pages = response.json();
-       this.pages = pages;
-       if (pages.length > 0) {
-         this.current_page = pages[0];
-       }
-     }, (response) => {
-       console.log('Error');
-     });
-   },
-   methods: {
-     loadPage(page) {
-       this.$dispatch('new-page', page);
-     }
-   }
- }
-</script>
-            </code></pre>
-          </section>
-          <section>
-            <h2>Events</h2>
-            <p>Page detail:</p>
-            <pre><code lang="js">
-<template>
-  <div>
-    <h2>{{ title }}</h2>
-    {{ body }}
-  </div>
-</template>
-<script>
- export default {
-   name: "Page",
-   data() {
-     return {
-       title: "The Title",
-       body: "The Body"
-     }
-   },
-   ready() {
-     this.$on('new-page', function(newPage) {
-       this.title = newPage.title;
-       this.body = newPage.body;
-     });
-   }
- }
-</script>
-            </code></pre>
-          </section>
-          <section>
-            <h2>Events</h2>
-            <p>main.js:</p>
+            <h3>The Cat List - main.js</h3>
             <pre><code lang="js">
 import Vue from 'vue';
 import VueResource from 'vue-resource';
 
 Vue.use(VueResource);
 
-import Pages from './components/pages.vue';
-import Page from './components/page.vue';
+import Demo from './components/demo.vue';
+import Cat from './components/cat.vue';
+import Cats from './components/cats.vue';
 
 new Vue({
   el: '#page',
   components: {
-    Pages,
-    Page
+    Demo,
+    Cat,
+    Cats
   },
-  ready() {
-    this.$on('new-page', function(page) {
-      this.$broadcast('new-page', page);
-    });
+  methods: {
+    ready() {
+      this.$on('new-cat', function(cat) {
+        this.$broadcast('new-cat', cat);
+      }, (response) => {
+        console.log('Error');
+      });
+    }
+  }
+});
+            </code></pre>
+          </section>
+          <section>
+            <h2>Integrating REST Services</h2>
+            <p>Demo</p>
+            <p><img src="images/scared-face.png" class="plain" height="200px" width="200px" /></p>
+	    <aside class="notes">
+              <ul>
+                <li>Copy main_3.js to main.js</li>
+                <li>Add a "cats" vue block</li>
+              </ul>
+	    </aside>
+          </section>
+          <section>
+            <h1>Adding Another Event Listener</h1>
+          </section>
+          <section>
+            <h2>Cat Counter - cat_counter.vue</h2>
+            <pre><code lang="js">
+<template>
+  <div>
+    <h2>Cat Pictures Viewed</h2>
+    <span class="cat-count">{{ count }}</span>
+  </div>
+</template>
+<script>
+ export default {
+   name: "CatCounter",
+   data() {
+     return {
+       count: 0
+     }
+   },
+   ready() {
+     this.$on('new-cat', function(newCat) {
+       this.count++;
+     });
+   }
+ }
+</script>
+<style>
+ .cat-count {
+   font-size: 24px;
+ }
+</style>
+            </code></pre>
+          </section>
+          <section>
+            <h2>Cat Counter - main.js</h2>
+            <pre><code lang="js">
+import Vue from 'vue';
+import VueResource from 'vue-resource';
+
+Vue.use(VueResource);
+
+import Demo from './components/demo.vue';
+import Cat from './components/cat.vue';
+import Cats from './components/cats.vue';
+import CatCounter from './components/cat_counter.vue';
+
+new Vue({
+  el: '#page',
+  components: {
+    Demo,
+    Cat,
+    Cats,
+    CatCounter
+  },
+  methods: {
+    ready() {
+      this.$on('new-cat', function(cat) {
+        this.$broadcast('new-cat', cat);
+      }, (response) => {
+        console.log('Error');
+      });
+    }
   }
 });
             </code></pre>
@@ -714,10 +773,10 @@ new Vue({
               <li class="fragment">Use Vue Resource for "ajax" integration</li>
               <li class="fragment">Use Vue Router for Single Page Apps</li>
               <li class="fragment">Use Vuex for complicated state management</li>
-              <li class="fragment">Learn Javascript (es2016)</li>
+              <li class="fragment">Learn Javascript (es6/es2015)</li>
+              <li class="fragment">Check out <a href="https://laravel.com/docs/master/elixir">Laravel Elixer</a></li>
             </ul>
           </p>
-        </section>
         </section>
 	<section>
           <h1>Resources</h1>
@@ -735,6 +794,9 @@ new Vue({
               <li><a href="https://www.drupal.org/project/restui">RestUI Module</a></li>
             </ul>
           </p>
+        </section>
+        <section>
+          <h1>Thank You!</h1>
         </section>
       </div>
     </div>
