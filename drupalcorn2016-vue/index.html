@@ -51,6 +51,13 @@
           </p>
         </section>
         <section>
+          <h1>What is Vue.js?</h1>
+          <p>
+            The goal of Vue.js is to provide the benefits of <strong>reactive data binding</strong> and <strong>composable view components</strong>
+            with an API that is as simple as possible.
+          </p>
+        </section>
+        <section>
           <h1>Why Vue.js</h1>
           <p>
             <ul>
@@ -63,8 +70,20 @@
           </p>
         </section>
         <section>
+          <h1>The Goal</h1>
+          <p>
+            <img src="images/screenshot.png" />
+          </p>
+        </section>
+        <section>
           <section>
             <h1>Vue.js</h1>
+          </section>
+          <section>
+            <h2>Data Binding</h2>
+            <p>
+              <img src="images/mvvm.png" />
+            </p>
           </section>
           <section>
             <h2>Data Binding</h2>
@@ -238,13 +257,16 @@ new Vue({
                 <li class="fragment">Scripts can be Javascript, CoffeeScript, etc.</li>
                 <li class="fragment">Styles can be CSS, Sass, etc.</li>
               </ul>
+            </p>
           </section>
           <section>
-            <h2>Single Components</h2>
+            <h2>Single File Components</h2>
             <pre><code lang="js">
 <template>
-  <h1>Demo Component</h1>
-  <p class="red">{{ message }}</p>
+  <div>
+    <h1>Demo Component</h1>
+    <p class="red">{{ message }}</p>
+  </div>
 </template>
 <script>
   export default {
@@ -264,7 +286,7 @@ new Vue({
             </code></pre>
           </section> 
           <section>
-            <h2>Single Components</h2>
+            <h2>Single File Components</h2>
             <pre><code lang="js">
 import Vue from 'vue';
 
@@ -317,60 +339,6 @@ gulp.task('webpack', function() {
             <p>Demo</p>
             <p><img src="images/scared-face.png" class="plain" height="200px" width="200px" /></p>
           </section>
-          <section>
-            <h2>Resources</h2>
-            <ul>
-              <li class="fragment">Easy ajax calls</li>
-            </ul>
-          </section>
-          <section>
-            <h2>Resources</h2>
-            <pre><code lang="js">
-<template>
-  <h2>Pages</h2>
-  <p>
-    <ul>
-      <li v-for="page in pages">
-        {{ page.title }}
-      </li>
-    </ul>
-  </p>
-</template>
-<script>
- export default {
-   name: "Pages",
-   data() {
-     return {
-       pages: {}
-     }
-   },
-   ready() {
-     Vue.http.get('/api/pages').then((response) => {
-       var pages = response.json();
-       this.$set('pages', pages);
-     }, (response) => {
-       console.log('Error');
-     });
-   }
- }
-</script>
-            </code></pre>
-          </section>
-          <section>
-            <h2>Resources</h2>
-            <p>Demo</p>
-            <p><img src="images/scared-face.png" class="plain" height="200px" width="200px" /></p>
-	    <aside class="notes">
-              <ul>
-                <li>Drupal View producing json</li>
-                <li>Custom block for the component</li>
-                <li>main.js adding the component</li>
-              </ul>
-	    </aside>
-          </section>
-          <section>
-            <h2>Routing</h2>
-          </section>
         </section>
         <section>
           <section>
@@ -379,14 +347,44 @@ gulp.task('webpack', function() {
               <li class="fragment">Creating custom component blocks and content items</li>
               <li class="fragment">Using Drupal 8's built in REST API support</li>
             </ul>
+            <aside class="notes">
+              <p>We're only going to look at adding functionality to a Drupal site, not creating a SPA.</p>
+            </aside>
           </section>
           <section>
-            <h2>Adding Components</h2>
+            <h2>Adding Components To A Drupal Site</h2>
             <ul>
-              <li class="fragment">Theming</li>
               <li class="fragment">Custom block type</li>
               <li class="fragment">Custom content type</li>
+              <li class="fragment">Add Vue.js to your theme</li>
             </ul>
+          </section>
+          <section>
+            <h2>Custom Block Type</h2>
+            <p><img src="images/custom_block_type.png" class="plain" /></p>
+          </section>
+          <section>
+            <h2>Custom Content Type</h2>
+            <p><img src="images/custom_content_type.png" class="plain" /></p>
+          </section>
+          <section>
+            <h2>Theme Files - Block</h2>
+            <pre><code lang="twig">
+{# block--vue-block.html.twig #}
+{{ content.field_component_name }}
+            </code></pre>
+            <aside class="notes">
+              <p>For the content type we'll just use the standard node template, Bartik just had some bits in the block I wanted to remove.</p>
+            </aside>
+          </section>
+          <section>
+            <h2>Theme Files - Field</h2>
+            <pre><code lang="twig">
+{# field--field-component-name.html.twig #}
+{% for item in items %}
+  <{{ item.content }}></{{ item.content }}>
+{% endfor %}
+            </code></pre>
           </section>
           <section>
             <h2>Theme Setup</h2>
@@ -448,21 +446,42 @@ gulp.task('webpack', function() {
             </code></pre>
           </section>
           <section>
-            <h2>Theme Setup</h2>
-            <p>Template Files - Block</p>
-            <pre><code lang="twig">
-{# block--vue-block.html.twig #}
-{{ content.field_component_name }}
+            <h2>Adding Components</h2>
+            <h3>demo.vue</h3>
+            <pre><code>
+<template>
+  <div>
+    <h2>{{ title }}</h2>
+    {{ message }}
+  </div>
+</template>
+<script>
+ export default {
+   name: "Demo",
+   data() {
+     return {
+       title: "This Is A Demo",
+       message: "Vue.js is awesome."
+     }
+   }
+ }
+</script>
             </code></pre>
           </section>
           <section>
-            <h2>Theme Setup</h2>
-            <p>Template Files - Field</p>
-            <pre><code lang="twig">
-{# field--field-component-name.html.twig #}
-{% for item in items %}
-<{{ item.content }}></{{ item.content }}>
-{% endfor %}
+            <h2>Adding Components</h2>
+            <h3>main.js</h3>
+            <pre><code>
+import Vue from 'vue';
+
+import Demo from './components/demo.vue';
+
+new Vue({
+  el: '#page',
+  components: {
+    Demo
+  }
+});
             </code></pre>
           </section>
           <section>
@@ -471,9 +490,9 @@ gulp.task('webpack', function() {
             <p><img src="images/scared-face.png" class="plain" height="200px" width="200px" /></p>
 	    <aside class="notes">
               <ul>
-                <li>Show custom block type and content type</li>
-                <li>Show custom theme templates</li>
-                <li>Show Vue bit in theme</li>
+                <li>Copy main_1.js to main.js</li>
+                <li>Add a page, with a menu to /demo</li>
+                <li>Add a "demo" component block</li>
               </ul>
 	    </aside>
           </section>
@@ -486,14 +505,205 @@ gulp.task('webpack', function() {
           </section>
           <section>
             <h2>Integrating REST Services</h2>
+            <h3>The Cat Content Type</h3>
+            <p>
+              <img src="images/cat_picture_content_type.png" />
+            </p>
+          </section>
+          <section>
+            <h2>Integrating REST Services</h2>
+            <h3>A Page For The Cats</h3>
+            <p>
+              <img src="images/screenshot_page.png" />
+            </p>
+          </section>
+          <section>
+            <h2>Integrating REST Services</h2>
+            <h3>A List Of Cats</h3>
+            <p>
+              <img src="images/screenshot_list.png" />
+            </p>
+          </section>
+          <section>
+            <h2>Integrating REST Services</h2>
+            <h3>The Cat List API View</h3>
+            <p>
+              <img src="images/cat_picture_list_api_view.png" />
+            </p>
+            <aside class="notes">
+              <p>Go to browser and hit the endpoint to show the json</p>
+            </aside>
+          </section>
+          <section>
+            <h2>Integrating REST Services</h2>
+            <h3>The Cats Component</h3>
+            <pre><code lang="js">
+<template>
+  <div>
+    <h2>Cats</h2>
+    <p>
+      <ul>
+        <li v-for="cat in cats">
+          <a v-on:click="loadCat(cat)">{{ cat.title }}</a>
+        </li>
+      </ul>
+    </p>
+  </div>
+</template>
+<script>
+ import VueRouter from 'vue-router';
+ export default {
+   name: "Cats",
+   data() {
+     return {
+       cats: {},
+       current_cat: ""
+     }
+   },
+   ready() {
+     Vue.http.get('/api/cats').then((response) => {
+       var cats = response.json();
+       this.cats = cats;
+     }, (response) => {
+       console.log('Error');
+     });
+   },
+   methods: {
+     loadCat(cat) {
+       this.$dispatch('new-cat', cat);
+     }
+   }
+ }
+</script>
+<style>
+ a:hover {
+   cursor: pointer;
+ }
+</style>
+            </code></pre>
+          </section>
+          <section>
+            <h2>Integrating REST Services</h2>
             <p>Demo</p>
             <p><img src="images/scared-face.png" class="plain" height="200px" width="200px" /></p>
 	    <aside class="notes">
               <ul>
-                <li>Show View with restful pages</li>
-                <li>Show component that retrieves the data</li>
+                <li>Drupal View producing json</li>
+                <li>Custom block for the component</li>
+                <li>main.js adding the component</li>
               </ul>
 	    </aside>
+          </section>
+          <section>
+            <h2>Events</h2>
+            <p>
+              <ul>
+                <li class="fragment">Notifications and data between components</li>
+                <li class="fragment">Child components pass events up to parents</li>
+                <li class="fragment">Parents pass events down to children</li>
+              </ul>
+            </p>
+          </section>
+          <section>
+            <h2>Events</h2>
+            <p>Pages listing:</p>
+            <pre><code lang="js">
+<template>
+  <div>
+    <h2>Pages</h2>
+    <p>
+      <ul>
+        <li v-for="page in pages">
+          <a v-on:click="loadPage(page)">{{ page.title }}</a>
+        </li>
+      </ul>
+    </p>
+  </div>
+</template>
+<script>
+ import VueRouter from 'vue-router';
+ export default {
+   name: "Pages",
+   data() {
+     return {
+       pages: {},
+       current_page: ""
+     }
+   },
+   ready() {
+     Vue.http.get('/api/pages').then((response) => {
+       var pages = response.json();
+       this.pages = pages;
+       if (pages.length > 0) {
+         this.current_page = pages[0];
+       }
+     }, (response) => {
+       console.log('Error');
+     });
+   },
+   methods: {
+     loadPage(page) {
+       this.$dispatch('new-page', page);
+     }
+   }
+ }
+</script>
+            </code></pre>
+          </section>
+          <section>
+            <h2>Events</h2>
+            <p>Page detail:</p>
+            <pre><code lang="js">
+<template>
+  <div>
+    <h2>{{ title }}</h2>
+    {{ body }}
+  </div>
+</template>
+<script>
+ export default {
+   name: "Page",
+   data() {
+     return {
+       title: "The Title",
+       body: "The Body"
+     }
+   },
+   ready() {
+     this.$on('new-page', function(newPage) {
+       this.title = newPage.title;
+       this.body = newPage.body;
+     });
+   }
+ }
+</script>
+            </code></pre>
+          </section>
+          <section>
+            <h2>Events</h2>
+            <p>main.js:</p>
+            <pre><code lang="js">
+import Vue from 'vue';
+import VueResource from 'vue-resource';
+
+Vue.use(VueResource);
+
+import Pages from './components/pages.vue';
+import Page from './components/page.vue';
+
+new Vue({
+  el: '#page',
+  components: {
+    Pages,
+    Page
+  },
+  ready() {
+    this.$on('new-page', function(page) {
+      this.$broadcast('new-page', page);
+    });
+  }
+});
+            </code></pre>
           </section>
         </section>
 	<section>
@@ -502,7 +712,7 @@ gulp.task('webpack', function() {
             <ul>
               <li class="fragment">Prefer Vue functionality over jQuery, etc.</li>
               <li class="fragment">Use Vue Resource for "ajax" integration</li>
-              <li class="fragment">Use Vue Router for "SPA" behavior</li>
+              <li class="fragment">Use Vue Router for Single Page Apps</li>
               <li class="fragment">Use Vuex for complicated state management</li>
               <li class="fragment">Learn Javascript (es2016)</li>
             </ul>
@@ -513,15 +723,16 @@ gulp.task('webpack', function() {
           <h1>Resources</h1>
           <p>
             <ul>
-              <li class="fragment"><a href="https://vuejs.org/">Vue.js</a></li>
-              <li class="fragment"><a href="https://github.com/vuejs/vue-resource">Vue Resource</a></li>
-              <li class="fragment"><a href="https://github.com/vuejs/vue-router">Vue Router</a></li>
-              <li class="fragment"><a href="https://github.com/vuejs/vuex">Vuex</a></li>
-              <li class="fragment"><a href="https://leanpub.com/book_search?search=vue">Vue Books On Leanpub</a></li>
-              <li class="fragment"><a href="https://laracasts.com/series/learning-vue-step-by-step">Vue Series On Laracasts</a></li>
-              <li class="fragment"><a href="https://webpack.github.io/">Webpack</a></li>
-              <li class="fragment"><a href=""></a></li>
-              <li class="fragment"><a href=""></a></li>
+              <li><a href="https://vuejs.org/">Vue.js</a></li>
+              <li><a href="https://github.com/vuejs/vue-resource">Vue Resource</a></li>
+              <li><a href="https://github.com/vuejs/vue-router">Vue Router</a></li>
+              <li><a href="https://github.com/vuejs/vuex">Vuex</a></li>
+              <li><a href="https://leanpub.com/book_search?search=vue">Vue Books On Leanpub</a></li>
+              <li><a href="https://laracasts.com/series/learning-vue-step-by-step">Vue Series On Laracasts</a></li>
+              <li><a href="http://watch-learn.com/series/one-page-app-with-drupal-8-and-vue-js">Watch+Learn Series - SPA With Vue and Drupal 8</a></li>
+              <li><a href="https://webpack.github.io/">Webpack</a></li>
+              <li><a href="https://www.drupal.org/developing/api/8/rest">Drupal 8 Rest API</a></li>
+              <li><a href="https://www.drupal.org/project/restui">RestUI Module</a></li>
             </ul>
           </p>
         </section>
