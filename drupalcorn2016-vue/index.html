@@ -56,6 +56,9 @@
             The goal of Vue.js is to provide the benefits of <strong>reactive data binding</strong> and <strong>composable view components</strong>
             with an API that is as simple as possible.
           </p>
+          <aside class="notes">
+            <p>Provides a way to update your page when a javascript data structure changes, a way to react to user interactions with the page, and a way to organize re-usable components so your app can scale</p>
+          </aside>
         </section>
         <section>
           <h1>Why Vue.js</h1>
@@ -74,6 +77,13 @@
           <p>
             <img src="images/screenshot.png" />
           </p>
+          <aside class="notes">
+            <ul>
+              <li>List of cats from Drupal</li>
+              <li>Display of each cat without having to go back to the server</li>
+              <li>A counter of cats viewed</li>
+            </ul>
+          </aside>
         </section>
         <section>
           <section>
@@ -84,6 +94,12 @@
             <p>
               <img src="images/mvvm.png" />
             </p>
+            <aside class="notes">
+              <ul>
+                <li>Data binding update you page when the javascript data structure changes</li>
+                <li>DOM listeners update the data structure, or call arbitrary methods</li>
+              </ul>
+            </aside>
           </section>
           <section>
             <h2>Data Binding</h2>
@@ -119,6 +135,10 @@ new Vue({
             <h2>Data Binding</h2>
             <p>Demo</p>
             <p><img src="images/scared-face.png" class="plain" height="200px" width="200px" /></p>
+            <aside class="notes">
+              <p>http://vue-static/simple</p>
+              <p>Show source to see the javascript include</p>
+            </aside>
           </section>
           <section>
             <h2>Methods</h2>
@@ -157,6 +177,9 @@ new Vue({
             <h2>Methods</h2>
             <p>Demo</p>
             <p><img src="images/scared-face.png" class="plain" height="200px" width="200px" /></p>
+            <aside class="notes">
+              <p>http://vue-static/methods</p>
+            </aside>
           </section>
           <section>
             <h2>Components</h2>
@@ -164,7 +187,6 @@ new Vue({
               <ul>
                 <li class="fragment">Extends HTML (new tags)</li>
                 <li class="fragment">Encapsulates reusable code</li>
-                <li class="fragment">Groups template, Javascript, and styles into one file</li>
               </ul>
             </p>
           </section>
@@ -203,6 +225,9 @@ new Vue({
             <h2>Components</h2>
             <p>Demo</p>
             <p><img src="images/scared-face.png" class="plain" height="200px" width="200px" /></p>
+            <aside class="notes">
+              <p>http://vue-static/component</p>
+            </aside>
           </section>
           <section>
             <h2>Child Components</h2>
@@ -246,6 +271,10 @@ new Vue({
             <h2>Child Components</h2>
             <p>Demo</p>
             <p><img src="images/scared-face.png" class="plain" height="200px" width="200px" /></p>
+            <aside class="notes">
+              <p>http://vue-static/child-component</p>
+              <p>Real example: View with complicated layouts that also had interactions and pagination</p>
+            </aside>
           </section>
           <section>
             <h2>Single File Components</h2>
@@ -258,6 +287,16 @@ new Vue({
                 <li class="fragment">Styles can be CSS, Sass, etc.</li>
               </ul>
             </p>
+          </section>
+          <section>
+            <h2>Single File Components</h2>
+            <pre><code>
+<div class="row" id="app">
+  <div class="small-12 column">
+    <demo></demo>
+  </div>
+</div>
+            </code></pre>
           </section>
           <section>
             <h2>Single File Components</h2>
@@ -299,6 +338,9 @@ new Vue({
   }
 });
             </code></pre>
+            <aside class="notes">
+              <p>The Demo component is a child of the component created with "new Vue"</p>
+              <p>The name of the tag is derived from the name of the component - CamelCase -> lower-case</p>
           </section> 
           <section>
             <h2>Single File Components</h2>
@@ -333,11 +375,20 @@ gulp.task('webpack', function() {
     .pipe(gulp.dest('web/js/'));
 });
             </code></pre>
+            <aside class="notes">
+              <p>Webpack can be used on its own, replacing gulp</p>
+              <p>Other "loaders" like browserify will also work just fine</p>
+              <p>Vue CLI has examples using Webpack</p>
+            </aside>
           </section>
           <section>
             <h2>Single File Components</h2>
             <p>Demo</p>
             <p><img src="images/scared-face.png" class="plain" height="200px" width="200px" /></p>
+            <aside class="notes">
+              <p>http://vue-static/sfc</p>
+              <p>Pause here for any questions.</p>
+            </aside>
           </section>
         </section>
         <section>
@@ -352,12 +403,21 @@ gulp.task('webpack', function() {
             </aside>
           </section>
           <section>
+            <h2>Reminder - The Goal</h2>
+            <p>
+              <img src="images/screenshot.png" />
+            </p>
+          </section>
+          <section>
             <h2>Adding Components To A Drupal Site</h2>
             <ul>
               <li class="fragment">Custom block type</li>
               <li class="fragment">Custom content type</li>
               <li class="fragment">Add Vue.js to your theme</li>
             </ul>
+            <aside class="notes">
+              <p>The goal of all of this is to get a custom tag into a block or node</p>
+            </aside>
           </section>
           <section>
             <h2>Custom Block Type</h2>
@@ -366,25 +426,21 @@ gulp.task('webpack', function() {
           <section>
             <h2>Custom Content Type</h2>
             <p><img src="images/custom_content_type.png" class="plain" /></p>
-          </section>
-          <section>
-            <h2>Theme Files - Block</h2>
-            <pre><code lang="twig">
-{# block--vue-block.html.twig #}
-{{ content.field_component_name }}
-            </code></pre>
             <aside class="notes">
-              <p>For the content type we'll just use the standard node template, Bartik just had some bits in the block I wanted to remove.</p>
+              <p>Reminder - Goal for both is to get drupal to render the custom tag we specify</p>
             </aside>
           </section>
           <section>
             <h2>Theme Files - Field</h2>
-            <pre><code lang="twig">
+            <pre><code data-noescape>
 {# field--field-component-name.html.twig #}
 {% for item in items %}
-  <{{ item.content }}></{{ item.content }}>
+  <{{ item.content }}><&#47;{{ item.content }}>
 {% endfor %}
             </code></pre>
+            <aside class="notes">
+              <p>We're using a sub-theme of Bartik just so we can add the field template file and import the javascript, which is next.</p>
+            </aside>
           </section>
           <section>
             <h2>Theme Setup</h2>
@@ -444,6 +500,22 @@ gulp.task('webpack', function() {
     .pipe(gulp.dest('js/'));
 });
             </code></pre>
+            <aside class="notes">
+              <p>We're doing this because we're going to implement all of our components as SFCs.</p>
+            </aside>
+          </section>
+          <section>
+            <h2>Directory Structure For Our JS</h2>
+            <p><pre>
+src
+|-- components
+|   |-- app.vue
+|   |-- cat_counter.vue
+|   |-- cats.vue
+|   |-- cat.vue
+|   |-- demo.vue
+|-- main.js
+            </pre></p>
           </section>
           <section>
             <h2>Adding Components</h2>
@@ -521,7 +593,7 @@ new Vue({
             <h2>Integrating REST Services</h2>
             <ul>
               <li class="fragment">Use Vue Resource library for getting data from Drupal</li>
-              <li class="fragment">Events and methods can be used updating data</li>
+              <li class="fragment">Events and methods can be used for updating data</li>
             </ul>
           </section>
           <section>
@@ -530,6 +602,9 @@ new Vue({
             <p>
               <img src="images/cat_picture_content_type.png" />
             </p>
+            <aside class="notes">
+              <p>This is the pre-baked casserole. I've already populated the site with cat pictures</p>
+            </aside>
           </section>
           <section>
             <h2>Integrating REST Services</h2>
@@ -559,6 +634,10 @@ new Vue({
  }
 </script>
             </code></pre>
+            <aside class="notes">
+              <p>Point out how the "on" event works</p>
+              <p>Point out the triple braces</p>
+            </aside>
           </section>
           <section>
             <h2>Integrating REST Services</h2>
@@ -653,6 +732,16 @@ new Vue({
  }
 </style>
             </code></pre>
+            <aside class="notes">
+              <p>Point out the resource bits and the "dispatch" event works</p>
+            </aside>
+          </section>
+          <section>
+            <h2>Events</h2>
+            <p><img src="images/events.jpg" class="plain" /></p>
+            <aside class="notes">
+              <p>Reminder - This is how event dispatching works</p>
+            </aside>
           </section>
           <section>
             <h2>Integrating REST Services</h2>
@@ -685,6 +774,9 @@ new Vue({
   }
 });
             </code></pre>
+            <aside class="notes">
+              <p>Point out the "on" event that "broadcasts" the event to its children</p>
+            </aside>
           </section>
           <section>
             <h2>Integrating REST Services</h2>
@@ -698,7 +790,12 @@ new Vue({
 	    </aside>
           </section>
           <section>
-            <h1>Adding Another Event Listener</h1>
+            <h1>Adding The Counter</h1>
+            <p><img src="images/screenshot_counter.png" class="plain" /></p>
+          </section>
+          <section>
+            <h2>Another Event Listener</h2>
+            <p><img src="images/events2.jpg" class="plain" /></p>
           </section>
           <section>
             <h2>Cat Counter - cat_counter.vue</h2>
@@ -764,9 +861,20 @@ new Vue({
 });
             </code></pre>
           </section>
+          <section>
+            <h2>Cat Counter</h2>
+            <p>Demo</p>
+            <p><img src="images/scared-face.png" class="plain" height="200px" width="200px" /></p>
+	    <aside class="notes">
+              <ul>
+                <li>Copy main_4.js to main.js</li>
+                <li>Add a "cat-counter" vue block</li>
+              </ul>
+	    </aside>
+          </section>
         </section>
 	<section>
-          <h1>Tips and Guidelines</h1>
+          <h1>Tips</h1>
           <p>
             <ul>
               <li class="fragment">Prefer Vue functionality over jQuery, etc.</li>
@@ -808,6 +916,7 @@ new Vue({
      // More info https://github.com/hakimel/reveal.js#configuration
      Reveal.initialize({
        history: true,
+       transition: 'none',
 
        // More info https://github.com/hakimel/reveal.js#dependencies
        dependencies: [
