@@ -48,15 +48,73 @@
               <img class="plain" src="images/hopehouse-home.png" />
             </div>
           </section>
+        </section>
+        <section>
+	  <section>
+            <h1>Component Based Design</h1>
+          </section>
           <section>
-            <h2>Component Layouts</h2>
-            <p>
-              <ul>
-                <li class="fragment">Variations</li>
-                <li class="fragment">Nestable</li>
-                <li class="fragment">Responsive</li>
-              </ul>
-            </p>
+            <h2>Example</h2>
+            <div class="split">
+              <div class="two-thirds content-container">
+                <img class="plain" src="images/hopehouse-section.png" />
+              </div>
+              <div class="one-third">
+                <p class="left">
+                  Components
+                  <ul>
+                    <li>
+                      Section
+                      <ul>
+                        <li>Text</li>
+                        <li>
+                          Row
+                          <ul>
+                            <li>Image and Text</li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </p>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Example</h2>
+            <div class="split">
+              <div class="half content-container">
+                <img class="plain" src="images/hopehouse-section.png" />
+              </div>
+              <div class="half">
+                <p class="left">
+                  Characteristics
+                  <ul>
+                    <li class="fragment">Nested</li>
+                    <li class="fragment">Some Are For Content (Text, Image and Text)</li>
+                    <li class="fragment">Some Are For Layout (Row)</li>
+                    <li class="fragment">Some Are For Both (Section)</li>
+                  </ul>
+                </p>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Atomic Design</h2>
+            <div class="split">
+              <div class="half content-container">
+                <img class="plain" src="images/atomic-design.svg" />
+              </div>
+              <div class="half">
+                <p><a href="http://bradfrost.com/blog/post/atomic-web-design/">Article - Brad Frost</a></p>
+                <p><a href="http://atomicdesign.bradfrost.com/">Book - Brad Frost</a></p>
+              </div>
+            </div>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Goals</h1>
           </section>
           <section>
             <h2>Content Managers</h2>
@@ -71,6 +129,62 @@
               <p>Easy -> Simple, consistant process</p>
 	    </aside>
           </section>
+          <section>
+            <h2>Developers</h2>
+            <p>
+              <ul>
+                <li class="fragment">Leverage Drupal</li>
+                <li class="fragment">Right Tool For The Job</li>
+                <li class="fragment">Flexible</li>
+              </ul>
+            </p>
+	    <aside class="notes">
+              <p>
+                <ul>
+                  <li>Leverage Drupal - Site building exercise</li>
+                  <li>Right tool - Content vs layout</li>
+                  <li>Flexibible - The fewer the restrictions the better</li>
+                </ul>
+              </p>
+	    </aside>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>The Solution</h1>
+          </section>
+          <section>
+            <h2>Bricks</h2>
+            <p>
+              <ul>
+                <li class="fragment">Easily order and nest entity references</li>
+                <li class="fragment">Lightweight - leverages existing Drupal tools</li>
+                <li class="fragment">Flexible - use any entity type you want</li>
+                <li class="fragment">Seperates content entities and layout entities</li>
+              </ul>
+            </p>
+          </section>
+          <section>
+            <h2>Content Managers</h2>
+            <p>
+              <ul>
+                <li class="fragment">Familiar interface - just like menus and taxonomy</li>
+                <li class="fragment">Easy mental mapping</li>
+                <li class="fragment">Does not have to be concerned about page design</li>
+                <li class="fragment">Inline Entity Form makes content authoring easy</li>
+              </ul>
+            </p>
+          </section>
+          <section>
+            <h2>Developers</h2>
+            <p>
+              <ul>
+                <li class="fragment">No custom code/modules</li>
+                <li class="fragment">Use and re-use any entity type</li>
+                <li class="fragment">Layout API seperates content from layout</li>
+              </ul>
+            </p>
+          </section>
         </section>
         <section>
           <h2>A Simple Example</h2>
@@ -80,42 +194,32 @@
         </section>
         <section>
           <section>
-            <h1>Tools</h1>
+            <h1>Demo</h1>
 	    <aside class="notes">
               <p>Three simple tools</p>
 	    </aside>
           </section>
           <section>
-            <h2>Entities</h2>
-            <p>
-              ECK
-            </p>
-          </section>
-          <section>
-            <h2>Admin Forms</h2>
-            <p>
-              Inline Entity Form
-            </p>
-          </section>
-          <section>
-            <div class="content-container">
-              <img class="plain short" src="images/dancing-cat.gif" />
-            </div>
-          </section>
-          <section>
-            <h2>Bricks</h2>
+            <h2>Modules</h2>
             <p>
               <ul>
-                <li class="fragment">Drag and drop ordering and nesting of entities</li>
-                <li class="fragment">Works with existing Drupal concepts
-                  <ul>
-                    <li>Entity Reference</li>
-                    <li>View Modes</li>
-                    <li>Layout API</li>
-                  </ul>
-                </li>
+                <li>Bricks</li>
+                <li>Entity Construction Kit (dev version)</li>
+                <li>Inline Entity Form</li>
+                <li>Layout API (Experimental Core Module)</li>
               </ul>
             </p>
+	    <aside class="notes">
+              <p>
+                Also installed admin toolbar and devel<br/>
+                Used dev version of ECK due to the way it renders content (can't use without filter in current alpha)
+              </p>
+            </aside>
+          </section>
+          <section>
+            <h1>Awesome Demo<br/>Or</h1>
+            <p><img src="images/hitting-the-fan.gif" /></p>
+          </section>
           </section>
         </section>
 	<section>
@@ -139,7 +243,29 @@
           </section>
         </section>
 	<section>
-          <h1>Demo</h1>
+          <section>
+            <h1>Extras</h1>
+          </section>
+          <section>
+            <h2>Atomic Design</h2>
+            <table>
+              <thead>
+                <tr><th>Atomic Design</th><th>Drupal</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Layout</td><td>Blocks</td></tr>
+                <tr><td>Organism</td><td>Bricks</td></tr>
+                <tr><td>Molecule</td><td>Entity</td></tr>
+                <tr><td>Atoms</td><td>Fields</td></tr>
+              </tbody>
+            </table>
+          </section>
+          <section>
+            <h2>Living Style Guides</h2>
+            <p>
+              Emulsify
+            </p>
+          </section>
         </section>
 	<section>
           <h1>Resources</h1>

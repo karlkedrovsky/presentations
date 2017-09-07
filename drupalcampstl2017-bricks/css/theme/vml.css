@@ -303,5 +303,26 @@ body {
   height: auto;
 }
 
-.reveal .scrollable img {
+.reveal .split {
+  display: flex;
+  justify-content: space-between;
+}
+
+.reveal .split .half {
+  width: 49%;
+  max-width: 49%;
+}
+
+.reveal .split .one-third {
+  width: 32%;
+  max-width: 32%;
+}
+
+.reveal .split .two-thirds {
+  width: 65%;
+  max-width: 65%;
+}
+
+.reveal p.left {
+  text-align: left;
 }
