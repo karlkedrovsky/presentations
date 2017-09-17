@@ -109,8 +109,8 @@
                 <img class="plain" src="images/atomic-design.svg" />
               </div>
               <div class="half">
-                <p><a href="http://bradfrost.com/blog/post/atomic-web-design/">Article - Brad Frost</a></p>
-                <p><a href="http://atomicdesign.bradfrost.com/">Book - Brad Frost</a></p>
+                <p><a href="http://bradfrost.com/blog/post/atomic-web-design/" target="_blank">Article - Brad Frost</a></p>
+                <p><a href="http://atomicdesign.bradfrost.com/" target="_blank">Book - Brad Frost</a></p>
               </div>
             </div>
 	    <aside class="notes">
@@ -123,7 +123,8 @@
           <section>
             <h1>Goals</h1>
 	    <aside class="notes">
-              <p>The things I think about HOW - impementation decisions made for a reason</p>
+              <p>For the tools we use</p>
+              <p>The decisions you make should be informed by requirement - impementation decisions made for a reason</p>
 	    </aside>
           </section>
           <section>
@@ -133,6 +134,7 @@
                 <li class="fragment">Easy to author</li>
                 <li class="fragment">Choose, not create, layout</li>
                 <li class="fragment">Hard to break the design</li>
+                <li class="fragment">Use a minimum of tools</li>
               </ul>
             </p>
 	    <aside class="notes">
@@ -164,6 +166,31 @@
         <section>
           <section>
             <h1>The Solution</h1>
+            <aside class="notes">
+              <p>The technical solution for implementing component based designs</p>
+            </aside>
+          </section>
+          <section>
+            <h2>Entity Construction Kit, Inline Entity Form, and Bricks</h2>
+            <aside class="notes">
+              <p>We'll also leverage the Layout API in core</p>
+            </aside>
+          </section>
+          <section>
+            <h2>Entity Construction Kit</h2>
+            <p>
+              <ul>
+                <li class="fragment">Create custom entities without code</li>
+              </ul>
+            </p>
+          </section>
+          <section>
+            <h2>Inline Entity Form</h2>
+            <p>
+              <ul>
+                <li class="fragment">Inline editing if referenced entities</li>
+              </ul>
+            </p>
           </section>
           <section>
             <h2>Bricks</h2>
@@ -189,6 +216,9 @@
                 <li class="fragment">Inline Entity Form makes content authoring intuitive</li>
               </ul>
             </p>
+            <aside class="notes">
+              <p>So what does this give us?</p>
+            </aside>
           </section>
           <section>
             <h2>Developers</h2>
@@ -251,6 +281,13 @@
             <p class="fragment">Layout -> Layout API</p>
           </section>
           <section>
+            <h1>New Entity or Variation</h1>
+            <aside class="notes">
+              <p>The most common mistake it to generic or to specific of an entity</p>
+              <p>Thinking through all of your components can help avoid this</p>
+            </aside>
+          </section>
+          <section>
             <h2>Entities</h2>
             <p>
               <ul>
@@ -259,11 +296,14 @@
                 <li class="fragment">For Views use an entity with a Views Reference Field field</li>
               </ul>
             </p>
+            <aside class="notes">
+              <p>There may be some weirdness, e.g. entity labels and paragraphs</p>
+            </aside>
           </section>
         </section>
 	<section>
           <section>
-            <h1>Extras</h1>
+            <h1>Atomic Design and Drupal</h1>
           </section>
           <section>
             <h2>Atomic Design</h2>
@@ -301,11 +341,14 @@
           <h1>Resources</h1>
           <p>
             <ul>
-              <li><a href="https://www.drupal.org/project/bricks">Bricks</a></li>
-              <li><a href="https://www.design4drupal.org/sessions/site-building/entity-reference-component-based-site-builder">Entity Reference as a Component-based Site Builder</a></li>
-              <li>Emulsify</li>
-              <li>Views Reference Field</li>
-              <li>Layout API</li>
+              <li><a href="https://www.drupal.org/project/bricks" target="_blank">Bricks</a></li>
+              <li><a href="https://www.design4drupal.org/sessions/site-building/entity-reference-component-based-site-builder" target="_blank">Entity Reference as a Component-based Site Builder</a></li>
+              <li><a href="https://www.drupal.org/project/bootstrap_kit" target="_blank">Bootstrap Kit</a></li>
+              <li><a href="http://emulsify.info/" target="_blank">Emulsify</a></li>
+              <li><a href="http://www.mediacurrent.com/blog/integrating-components-drupal-8-part-1" target="_blank">Media Current - Building Components Using Twig</a></li>
+              <li><a href="https://www.drupal.org/project/viewsreference" target="_blank">Views Reference Field</a></li>
+              <li><a href="https://www.drupal.org/docs/8/api/layout-api" target="_blank">Layout API</a></li>
+              <li><a href="https://www.youtube.com/watch?v=kgfvH3OstSE&feature=youtu.be" target="_blank">Bootstrap Paragraphs</a></li>
             </ul>
           </p>
         </section>
