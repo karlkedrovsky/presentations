@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>reveal.js</title>
+    <title>Building Component Based Drupal Sites With Bricks</title>
 
     <link rel="stylesheet" href="css/reveal.css">
     <link rel="stylesheet" href="css/theme/vml.css">
@@ -52,6 +52,9 @@
         <section>
 	  <section>
             <h1>Component Based Design</h1>
+	    <aside class="notes">
+              <p>Generic/early name - more formal things like atomic design</p>
+	    </aside>
           </section>
           <section>
             <h2>Example</h2>
@@ -110,11 +113,18 @@
                 <p><a href="http://atomicdesign.bradfrost.com/">Book - Brad Frost</a></p>
               </div>
             </div>
+	    <aside class="notes">
+              <p>Formal way of defining and composing components (not Drupal specific)</p>
+              <p>We'll get to how this fits in with Drupal and Bricks later</p>
+	    </aside>
           </section>
         </section>
         <section>
           <section>
             <h1>Goals</h1>
+	    <aside class="notes">
+              <p>The things I think about HOW - impementation decisions made for a reason</p>
+	    </aside>
           </section>
           <section>
             <h2>Content Managers</h2>
@@ -127,6 +137,8 @@
             </p>
 	    <aside class="notes">
               <p>Easy -> Simple, consistant process</p>
+              <p>When something makes sense, it's easy to use</p>
+              <p>Use as few different concepts as possible, but no fewer</p>
 	    </aside>
           </section>
           <section>
@@ -141,7 +153,7 @@
 	    <aside class="notes">
               <p>
                 <ul>
-                  <li>Leverage Drupal - Site building exercise</li>
+                  <li>Leverage Drupal - Site building exercise - Drupal has the tools available, no need to invent new ones</li>
                   <li>Right tool - Content vs layout</li>
                   <li>Flexibible - The fewer the restrictions the better</li>
                 </ul>
@@ -163,6 +175,9 @@
                 <li class="fragment">Seperates content entities and layout entities</li>
               </ul>
             </p>
+	    <aside class="notes">
+              <p>Some entity types might be easier than others</p>
+	    </aside>
           </section>
           <section>
             <h2>Content Managers</h2>
@@ -171,7 +186,7 @@
                 <li class="fragment">Familiar interface - just like menus and taxonomy</li>
                 <li class="fragment">Easy mental mapping</li>
                 <li class="fragment">Does not have to be concerned about page design</li>
-                <li class="fragment">Inline Entity Form makes content authoring easy</li>
+                <li class="fragment">Inline Entity Form makes content authoring intuitive</li>
               </ul>
             </p>
           </section>
@@ -184,6 +199,9 @@
                 <li class="fragment">Layout API seperates content from layout</li>
               </ul>
             </p>
+	    <aside class="notes">
+              <p>Customizing/building component pages is a theming exercise</p>
+	    </aside>
           </section>
         </section>
         <section>
@@ -220,7 +238,7 @@
             <h1>Awesome Demo<br/>Or</h1>
             <p><img src="images/hitting-the-fan.gif" /></p>
           </section>
-          </section>
+        </section>
         </section>
 	<section>
           <section>
@@ -238,6 +256,7 @@
               <ul>
                 <li class="fragment">Bricks can use any entity type</li>
                 <li class="fragment">Start with ECK (it's easy)</li>
+                <li class="fragment">For Views use an entity with a Views Reference Field field</li>
               </ul>
             </p>
           </section>
@@ -253,18 +272,29 @@
                 <tr><th>Atomic Design</th><th>Drupal</th></tr>
               </thead>
               <tbody>
-                <tr><td>Layout</td><td>Blocks</td></tr>
-                <tr><td>Organism</td><td>Bricks</td></tr>
-                <tr><td>Molecule</td><td>Entity</td></tr>
                 <tr><td>Atoms</td><td>Fields</td></tr>
+                <tr><td>Molecule</td><td>Entity</td></tr>
+                <tr><td>Organism</td><td>Bricks</td></tr>
+                <tr><td>Templates</td><td>Content Type</td></tr>
+                <tr><td>Pages</td><td>Pages</td></tr>
               </tbody>
             </table>
+	    <aside class="notes">
+              <p>Atoms - Image, heading, or text</p>
+              <p>Molecules - Our Image and Text entity</p>
+              <p>Organism - The row of Image and Text entities</p>
+              <p>Templates - Our Component Page</p>
+              <p>It's flexible - just gives us a formal vocabulary for communicating between designers, developers, and clients</p>
+	    </aside>
           </section>
           <section>
             <h2>Living Style Guides</h2>
             <p>
               Emulsify
             </p>
+	    <aside class="notes">
+              <p>A Drupal starter theme that integrates Pattern Lab - a living style guide based on Atomic Design</p>
+            </aside>
           </section>
         </section>
 	<section>
@@ -272,7 +302,10 @@
           <p>
             <ul>
               <li><a href="https://www.drupal.org/project/bricks">Bricks</a></li>
-              <li><a href="https://www.design4drupal.org/sessions/site-building/entity-reference-component-based-site-builder">Entity Reference as a Component-based Site Builder</a>
+              <li><a href="https://www.design4drupal.org/sessions/site-building/entity-reference-component-based-site-builder">Entity Reference as a Component-based Site Builder</a></li>
+              <li>Emulsify</li>
+              <li>Views Reference Field</li>
+              <li>Layout API</li>
             </ul>
           </p>
         </section>
