@@ -272,6 +272,27 @@
         </section>
 	<section>
           <section>
+            <h1>A Small Lie</h1>
+          </section>
+          <section>
+            <h2>Removing Default Layouts</h2>
+            <p>
+              <pre><code class="php" data-trim data-noescape>
+/**
+* Implements hook_layout_alter().
+*/
+function remove_default_layouts_layout_alter(&$definitions) {
+  // Disable default layouts.
+  unset($definitions['layout_onecol']);
+  unset($definitions['layout_twocol']);
+  unset($definitions['layout_twocol_bricks']);
+  unset($definitions['layout_threecol_25_50_25']);
+  unset($definitions['layout_threecol_33_34_33']);
+}
+              </code></pre>
+            </p>
+          </section>
+          <section>
             <h1>Random Tips and Best Practices</h1>
           </section>
           <section>
