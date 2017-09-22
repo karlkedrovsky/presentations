@@ -188,7 +188,7 @@
             <h2>Inline Entity Form</h2>
             <p>
               <ul>
-                <li class="fragment">Inline editing if referenced entities</li>
+                <li class="fragment">Inline editing of referenced entities</li>
               </ul>
             </p>
           </section>
@@ -272,16 +272,16 @@
         </section>
 	<section>
           <section>
-            <h1>Guidelines and Best Practices</h1>
+            <h1>Random Tips and Best Practices</h1>
           </section>
           <section>
             <h2>Design -> Drupal</h2>
-            <p class="fragment">Components -> Bricks</p>
+            <p class="fragment">Components -> Entities/Bricks</p>
             <p class="fragment">Variations -> View Modes</p>
             <p class="fragment">Layout -> Layout API</p>
           </section>
           <section>
-            <h1>New Entity or Variation</h1>
+            <h1>New Entity or Variation?</h1>
             <aside class="notes">
               <p>The most common mistake it to generic or to specific of an entity</p>
               <p>Thinking through all of your components can help avoid this</p>
@@ -292,12 +292,17 @@
             <p>
               <ul>
                 <li class="fragment">Bricks can use any entity type</li>
-                <li class="fragment">Start with ECK (it's easy)</li>
-                <li class="fragment">For Views use an entity with a Views Reference Field field</li>
+                <li class="fragment">Start with ECK - it's easy and it works</li>
+                <li class="fragment">Default to using a brick for everything
+                  <ul>
+                    <li class="fragment">For Views use an entity with a Views Reference Field field</li>
+                  </ul>
+                </li>
               </ul>
             </p>
             <aside class="notes">
               <p>There may be some weirdness, e.g. entity labels and paragraphs</p>
+              <p>Using bricks for everything makes it simpler for content managers</p>
             </aside>
           </section>
         </section>
