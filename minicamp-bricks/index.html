@@ -243,6 +243,7 @@
                 <li>Entity Construction Kit (dev version)</li>
                 <li>Inline Entity Form</li>
                 <li>Layout Discovery (in core)</li>
+                <li>Layout Discovery Override</li>
                 <li>Paragraphs</li>
               </ul>
             </p>
@@ -251,6 +252,7 @@
                 Also installed admin toolbar and devel<br/>
                 Used dev version of ECK due to the way it renders content in templates (can't use without filter in current alpha)
               </p>
+              <p>Layout Discovery Override removed default layouts included in core</p>
               <p>Paragraphs is only included to demonstrate an alternative</p>
             </aside>
           </section>
@@ -260,27 +262,6 @@
           </section>
         </section>
         <section>
-          <section>
-            <h1>A Small Lie</h1>
-          </section>
-          <section>
-            <h2>Removing Default Layouts</h2>
-            <p>
-              <pre><code class="php" data-trim data-noescape>
-/**
-* Implements hook_layout_alter().
-*/
-function remove_default_layouts_layout_alter(&$definitions) {
-  // Disable default layouts.
-  unset($definitions['layout_onecol']);
-  unset($definitions['layout_twocol']);
-  unset($definitions['layout_twocol_bricks']);
-  unset($definitions['layout_threecol_25_50_25']);
-  unset($definitions['layout_threecol_33_34_33']);
-}
-              </code></pre>
-            </p>
-          </section>
           <section>
             <h1>Random Tips and Best Practices</h1>
           </section>
