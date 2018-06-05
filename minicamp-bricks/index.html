@@ -1,0 +1,372 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Building Component Based Drupal Sites With Bricks</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/vml.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+     var link = document.createElement( 'link' );
+     link.rel = 'stylesheet';
+     link.type = 'text/css';
+     link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+     document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>Building Component Based Drupal Sites With Bricks</h1>
+          <p>
+            <small><a href="http://www.kedrovsky.com">Karl Kedrovsky</a></small><br>
+            <small><a href="http://www.vml.com">VML</a></small><br>
+            <small><a href="mailto:karl.kedrovsky@vml.com">karl.kedrovsky@vml.com</a></small><br>
+            <small><a href="mailto:karl@kedrovsky.com">karl@kedrovsky.com</a></small><br>
+            <small><a href="https://twitter.com/karlkedrovsky">@karlkedrovsky</a></small><br>
+          </p>
+        </section>
+        <section>
+          <section>
+            <h1>Motivation</h1>
+          </section>
+          <section>
+            <div class="content-container scrollable">
+              <img class="plain" src="images/hopehouse-old.png" />
+            </div>
+          </section>
+          <section>
+            <div class="content-container scrollable">
+              <img class="plain" src="images/hopehouse-home.png" />
+            </div>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Component Based Design</h1>
+          </section>
+          <section>
+            <h2>Example</h2>
+            <div class="split">
+              <div class="two-thirds content-container">
+                <img class="plain" src="images/hopehouse-section.png" />
+              </div>
+              <div class="one-third">
+                <p class="left">
+                  Components
+                  <ul>
+                    <li>
+                      Section
+                      <ul>
+                        <li>Text</li>
+                        <li>
+                          Row
+                          <ul>
+                            <li>Image and Text</li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </p>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Example</h2>
+            <div class="split">
+              <div class="half content-container">
+                <img class="plain" src="images/hopehouse-section.png" />
+              </div>
+              <div class="half">
+                <p class="left">
+                  Characteristics
+                  <ul>
+                    <li class="fragment">Nested</li>
+                    <li class="fragment">Some Are For Content (Text, Image and Text)</li>
+                    <li class="fragment">Some Are For Layout (Row)</li>
+                    <li class="fragment">Some Are For Both (Section)</li>
+                  </ul>
+                </p>
+              </div>
+            </div>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Goals</h1>
+            <aside class="notes">
+              <p>For the tools we use</p>
+              <p>The decisions you make should be informed by requirement - impementation decisions made for a reason</p>
+            </aside>
+          </section>
+          <section>
+            <h2>Content Managers</h2>
+            <p>
+              <ul>
+                <li class="fragment">Easy to author</li>
+                <li class="fragment">Choose, not create, layout</li>
+                <li class="fragment">Hard to break the design</li>
+                <li class="fragment">Use a minimum of tools</li>
+              </ul>
+            </p>
+            <aside class="notes">
+              <p>Easy -> Simple, consistant process</p>
+              <p>When something makes sense, it's easy to use</p>
+              <p>Use as few different concepts as possible, but no fewer</p>
+            </aside>
+          </section>
+          <section>
+            <h2>Developers</h2>
+            <p>
+              <ul>
+                <li class="fragment">Leverage Drupal</li>
+                <li class="fragment">Right Tool For The Job</li>
+                <li class="fragment">Flexible</li>
+              </ul>
+            </p>
+            <aside class="notes">
+              <p>
+                <ul>
+                  <li>Leverage Drupal - Site building exercise - Drupal has the tools available, no need to invent new ones</li>
+                  <li>Right tool - Content vs layout</li>
+                  <li>Flexibible - The fewer the restrictions the better</li>
+                </ul>
+              </p>
+            </aside>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>The Solution</h1>
+            <aside class="notes">
+              <p>The technical solution for implementing component based designs</p>
+            </aside>
+          </section>
+          <section>
+            <h2>Entity Construction Kit, Inline Entity Form, and Bricks</h2>
+            <aside class="notes">
+              <p>We'll also leverage the Layout Discovery in core</p>
+            </aside>
+          </section>
+          <section>
+            <h2>Entity Construction Kit</h2>
+            <p>
+              <ul>
+                <li class="fragment">Create custom entities without code</li>
+              </ul>
+            </p>
+            <aside class="notes">
+              <p>Enities -> nodes, taxonomy terms. We'll create a new one called "component".</p>
+            </aside>
+          </section>
+          <section>
+            <h2>Inline Entity Form</h2>
+            <p>
+              <ul>
+                <li class="fragment">Inline editing of referenced entities</li>
+              </ul>
+            </p>
+            <aside class="notes">
+              <p>Keeps content manager on the page when editing components rather than going to a seperate page.</p>
+            </aside>
+          </section>
+          <section>
+            <h2>Bricks</h2>
+            <p>
+              <ul>
+                <li class="fragment">Easily order and nest entity references</li>
+                <li class="fragment">Lightweight - leverages existing Drupal tools</li>
+                <li class="fragment">Flexible - use any entity type you want</li>
+                <li class="fragment">Seperates content entities and layout entities</li>
+              </ul>
+            </p>
+            <aside class="notes">
+              <p>Some entity types might be easier than others</p>
+            </aside>
+          </section>
+          <section>
+            <h2>Content Managers</h2>
+            <p>
+              <ul>
+                <li class="fragment">Familiar interface - just like menus and taxonomy</li>
+                <li class="fragment">Easy mental mapping</li>
+                <li class="fragment">Does not have to be concerned about page design</li>
+                <li class="fragment">Inline Entity Form makes content authoring intuitive</li>
+              </ul>
+            </p>
+            <aside class="notes">
+              <p>So what does this give us?</p>
+            </aside>
+          </section>
+          <section>
+            <h2>Developers</h2>
+            <p>
+              <ul>
+                <li class="fragment">No custom code/modules</li>
+                <li class="fragment">Components are as easy to create, manage, etc. as content types</li>
+                <li class="fragment">Layout Discovery seperates content from layout</li>
+              </ul>
+            </p>
+            <aside class="notes">
+              <p>Customizing/building component pages is a theming exercise</p>
+            </aside>
+          </section>
+        </section>
+        <section>
+          <h2>A Simple Example</h2>
+          <div class="content-container">
+            <img class="plain" src="images/wire-to-tree.png" />
+          </div>
+        </section>
+        <section>
+          <section>
+            <h1>Demo</h1>
+            <aside class="notes">
+              <p>Three simple tools</p>
+            </aside>
+          </section>
+          <section>
+            <h2>Modules</h2>
+            <p>
+              <ul>
+                <li>Bricks</li>
+                <li>Entity Construction Kit (dev version)</li>
+                <li>Inline Entity Form</li>
+                <li>Layout Discovery (in core)</li>
+                <li>Paragraphs</li>
+              </ul>
+            </p>
+            <aside class="notes">
+              <p>
+                Also installed admin toolbar and devel<br/>
+                Used dev version of ECK due to the way it renders content in templates (can't use without filter in current alpha)
+              </p>
+              <p>Paragraphs is only included to demonstrate an alternative</p>
+            </aside>
+          </section>
+          <section>
+            <h1>Awesome Demo<br/>Or</h1>
+            <p><img src="images/hitting-the-fan.gif" /></p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>A Small Lie</h1>
+          </section>
+          <section>
+            <h2>Removing Default Layouts</h2>
+            <p>
+              <pre><code class="php" data-trim data-noescape>
+/**
+* Implements hook_layout_alter().
+*/
+function remove_default_layouts_layout_alter(&$definitions) {
+  // Disable default layouts.
+  unset($definitions['layout_onecol']);
+  unset($definitions['layout_twocol']);
+  unset($definitions['layout_twocol_bricks']);
+  unset($definitions['layout_threecol_25_50_25']);
+  unset($definitions['layout_threecol_33_34_33']);
+}
+              </code></pre>
+            </p>
+          </section>
+          <section>
+            <h1>Random Tips and Best Practices</h1>
+          </section>
+          <section>
+            <h2>Design -> Drupal</h2>
+            <p class="fragment">Components -> Entities/Bricks</p>
+            <p class="fragment">Variations -> View Modes</p>
+            <p class="fragment">Layout -> Layout Discovery</p>
+          </section>
+          <section>
+            <h1>New Entity or Variation?</h1>
+            <aside class="notes">
+              <p>The most common mistake is to make it too generic or too specific of an entity</p>
+              <p>Example - the label field only makes sense for tabs and accordions</p>
+              <p>If a simple row is much more common you might want a seperate entity for tabs/accordians (containers)</p>
+              <p>Thinking through all of your components can help avoid this</p>
+            </aside>
+          </section>
+          <section>
+            <h2>Entities</h2>
+            <p>
+              <ul>
+                <li class="fragment">Bricks can use any entity type</li>
+                <li class="fragment">Start with ECK - it's easy and it works</li>
+                <li class="fragment">Default to using a brick for everything
+                  <ul>
+                    <li class="fragment">For Views use an entity with a Views Reference Field field</li>
+                  </ul>
+                </li>
+                <li class="fragment">Consider custom entities for creating reusable component libraries</li>
+              </ul>
+            </p>
+            <aside class="notes">
+              <p>There may be some weirdness, e.g. entity labels and paragraphs</p>
+              <p>Using bricks for everything makes it simpler for content managers</p>
+              <p>Jim Birch's talk on Paragraphs is a good intro to how to start with reusable component libraries</p>
+            </aside>
+          </section>
+          <section>
+            <h2>Brick Field Limitation</h2>
+            <p>
+              <ul>
+                <li class="fragment">Can only reference one entity type</li>
+                <li class="fragment">Dynamic Entity Reference</li>
+              </ul>
+            </p>
+          </section>
+        </section>
+        <section>
+          <h1>Resources</h1>
+          <p>
+            <ul>
+              <li><a href="https://www.drupal.org/project/bricks" target="_blank">Bricks</a></li>
+              <li><a href="https://www.drupal.org/project/bootstrap_kit" target="_blank">Bootstrap Kit</a></li>
+              <li><a href="https://www.design4drupal.org/sessions/site-building/entity-reference-component-based-site-builder" target="_blank">Entity Reference as a Component-based Site Builder</a></li>
+              <li><a href="https://youtu.be/AClSyOC2KKk">Bricks, Paragraphs, and Modifiers talk from DrupalCon Nashville</a></li>
+              <li><a href="http://www.mediacurrent.com/blog/integrating-components-drupal-8-part-1" target="_blank">Media Current - Building Components Using Twig</a></li>
+              <li><a href="https://www.drupal.org/project/viewsreference" target="_blank">Views Reference Field</a></li>
+              <li><a href="https://www.drupal.org/docs/8/api/layout-api" target="_blank">Layout Discovery (API)</a></li>
+              <li><a href="https://www.youtube.com/watch?v=kgfvH3OstSE&feature=youtu.be" target="_blank">Bootstrap Paragraphs</a></li>
+              <li><a href="https://www.drupal.org/project/bricks/issues/2931045">Fix For no "title" field</a></li>
+              <li><a href="https://github.com/karlkedrovsky/bricksdemo-minicamp2018" target="_blank">Demo Site</a></li>
+            </ul>
+          </p>
+        </section>
+        <section>
+          <h1>Thank You!</h1>
+        </section>
+      </div>
+      <div class="logo"><img src="vml-logo-50.png" /></div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+     // More info about config & dependencies:
+     // - https://github.com/hakimel/reveal.js#configuration
+     // - https://github.com/hakimel/reveal.js#dependencies
+     Reveal.initialize({
+       dependencies: [
+   { src: 'plugin/markdown/marked.js' },
+   { src: 'plugin/markdown/markdown.js' },
+   { src: 'plugin/notes/notes.js', async: true },
+   { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+       ]
+     });
+    </script>
+  </body>
+</html>
